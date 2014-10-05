@@ -20,6 +20,10 @@ $RECYCLE.BIN/
 .classpath
 .project
 
+# Git Files
+.gitattributes
+.gitignore
+
 # =========================
 # Operating System Files
 # =========================
