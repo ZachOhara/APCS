@@ -1,4 +1,4 @@
-public class OharaStrings extends LastnameStrings {
+public class OharaStrings {
 
 	public static void main(String[] args) {
 		// printStrings and vertical methods
