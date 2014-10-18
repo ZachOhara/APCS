@@ -9,6 +9,7 @@ public class OharaScanner {
 	}
 	
 	public static void inputBirthday() {
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		System.out.print("On what day of the month were you born? ");
 		String day = input.next();
