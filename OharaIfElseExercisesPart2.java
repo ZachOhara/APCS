@@ -2,8 +2,7 @@
 public class OharaIfElseExercisesPart2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println(swapPairs("badcfehgkimlon"));
 	}
 	
 	public static double fractionSum(int n) {
@@ -44,6 +43,31 @@ public class OharaIfElseExercisesPart2 {
 		return "fall";
 	}
 	
-	public static getGrade(it)
+	public static double getGrade(int grade) {
+		if (0 > grade || grade > 100)
+			throw new IllegalArgumentException();
+		if (grade < 60)
+			return 0.0;
+		grade -= 62;
+		if (grade <= 0)
+			return 0.7;
+		return Math.min((double)grade/10 + 0.7, 4.0);
+		// return grade/10; return 4.0 if grade/10 is more than 4.0;
+	}
+	
+	// just for giggles. Return of -1.0 signifies illegal arguments
+	public static double getGradeOneLine(int grade) {
+		return (grade >= 0 && grade <= 100) ? (grade < 60 ? 0.0 : (grade <= 62 ? 0.7 : (grade >= 95 ? 4.0 : ((double)(grade-62)/10 + 0.7) ) ) ) : -1;
+		// Explanation:
+		// return -1 if OoR, else (0.0 if failing, else (0.7 if grade<=62, else (4.0 if grade>=95, else (grade on linear scale) ) ) )
+	}
+	
+	public static String swapPairs(String swapStr) {
+		String result = "";
+		int swaps = swapStr.length() / 2;
+		for (int i = 0; i < swaps; i++)
+			result +=  swapStr.substring(2*i + 1, 2*i + 2) + swapStr.substring(2*i, 2*i +1);
+		return result;
+	}
 
 }
