@@ -55,10 +55,12 @@ public class OharaProject3 {
 		System.out.println("    Weighted exam score: " + scoreToPercent(exScore));
 		// that mess of an expression is basically this.exScore as a percent to one decimal place
 		System.out.println();
+		return exScore;
 	}
 
 	// set the final grade
 	public static void setFinal(double hwScore, double exScore, Scanner console) {
+		double finScore;
 		System.out.println("Final exam:");
 		System.out.print("    Have you taken the final exam yet? (1 for yes, 2 for no) ");
 		boolean isFinalTaken = strIsYes(console.next());
@@ -77,7 +79,7 @@ public class OharaProject3 {
 		System.out.println("    Weighted exam score: " + scoreToPercent(finScore)); //(double)10*((int)this.finScore)/10);
 		// that mess of an expression is basically this.finScore as a percent to one decimal place
 		System.out.println();
-		System.out.println("    Your course grade is " + scoreToPercent(score()));
+		System.out.println("    Your course grade is " + scoreToPercent(score(hwScore, exScore, finScore)));
 	}
 
 	// useful if the user wants to do calculations without a final grade	
@@ -85,7 +87,7 @@ public class OharaProject3 {
 		double finScore;
 		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
 		int goal = getInputInteger("What percentage would you like to earn in the course? ", 4, console);
-		double reqWeightedFinal = ((double)goal/100) - hwMdScore();
+		double reqWeightedFinal = ((double)goal/100) - hwMdScore(hwScore, exScore);
 		double reqFinalScore = reqWeightedFinal / ((double)weight / 100);
 		finScore = reqFinalScore;
 		reqFinalScore = scoreToPercent(reqFinalScore);
@@ -94,7 +96,7 @@ public class OharaProject3 {
 		if (reqFinalScore > 100) {
 			finScore = (double)weight/100;
 			System.out.println("    Sorry, it is impossible to achieve this percentage.");
-			System.out.println("    The highest percentage you can get is " + scoreToPercent(score()));
+			System.out.println("    The highest percentage you can get is " + scoreToPercent(score(hwScore, exScore, finScore)));
 		}
 
 	}
@@ -110,12 +112,12 @@ public class OharaProject3 {
 	}
 
 	// score of combined homework and midterm
-	public double hwMdScore(hwScore, exScore) {
+	public static double hwMdScore(double hwScore, double exScore) {
 		return exScore + hwScore;
 	}
 
 	// combined score
-	public double score() {
+	public static double score(double hwScore, double exScore, double finScore) {
 		return exScore + finScore + hwScore;
 	}
 
