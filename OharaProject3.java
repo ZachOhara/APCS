@@ -3,53 +3,43 @@ import java.util.Scanner;
 public class OharaProject3 extends ClassGrade {
 
 	public static void main(String[] args) {
-		System.out.println("This program accepts your homework and exam\n"
-				+ "scores as input, and computes your grade in\n"
-				+ "the course or indicates what grade you need\n"
-				+ "to earn on the final exam.\n");
-		OharaProject3 grade = new OharaProject3();
-		// Is it more sensible for grade to be a ClassGrade, and for OharaProject3
-		// not to be a subclass of ClassGrade?
-		grade.setHomework();
-		grade.setMidterm();
-		grade.setFinal();
+		Scanner console = new Scanner(System.in);
+		printIntro();
+		double hwScore = setHomework(console);
+		double exScore = setMidterm(console);
+		double finScore = setFinal(hwScore, exScore, console);
 	}
-}
-
-class ClassGrade {
 	
-	static Scanner console = new Scanner(System.in);
-
-	double hwScore; // homework score
-	double exScore; // midterm score
-	double finScore; // final score
-
-	public ClassGrade() {
-		// constructor doesn't do anything in particular
-		// is a constructor requried in this case?
+	public static void printIntro() {
+		System.out.println("This program accepts your homework and exam\n"
+			+ "scores as input, and computes your grade in\n"
+			+ "the course or indicates what grade you need\n"
+			+ "to earn on the final exam.\n");
 	}
-
+	
 	// set the homework grade
-	public void setHomework() {
+	public static double setHomework(Scanner console) {
+		double hwScore;
 		System.out.println("Homework:");
-		int weight = getInputInteger("What is its weight (0-100)? ", 4);
-		int assignments = getInputInteger("How many homework assignments were there? ", 4);
+		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
+		int assignments = getInputInteger("How many homework assignments were there? ", 4, console);
 		int[] points = new int[2];
 		int cumPoints = 0; //cumulative points
 		int cumPossible = 0; //cumulative possible points
 		for (int i = 1; i <= assignments; i++) {
-			points = getInputInteger("Homework " + i + " score and max score: ", 4, 2);
+			points = getInputInteger("Homework " + i + " score and max score: ", 4, 2, console);
 			cumPoints += points[0];
 			cumPossible += points[1];
 		}
-		this.hwScore = ((double)weight/100) * (double)cumPoints/ cumPossible;
+		hwScore = ((double)weight/100) * (double)cumPoints/ cumPossible;
 		System.out.println("    Weighted homework score: " + scoreToPercent(hwScore));
 		// that mess of an expression is basically this.hwScore as a percent to two decimal places
 		System.out.println();
+		return hwScore;
 	}
 
 	// set the midterm grade
-	public void setMidterm() {
+	public static double setMidterm(Scanner console) {
 		System.out.println("Midterm exam:");
 		int weight = getInputInteger("What is its weight (0-100)? ", 4);
 		int score = getInputInteger("Exam score: ", 4);
@@ -60,49 +50,49 @@ class ClassGrade {
 		if (isCurved) {
 			curve = getInputInteger("How much was the curve? ", 4);
 		}
-		this.exScore = ((double)weight * Math.min(score+curve, 100))/10000;
-		System.out.println("    Weighted exam score: " + scoreToPercent(this.exScore));
+		exScore = ((double)weight * Math.min(score+curve, 100))/10000;
+		System.out.println("    Weighted exam score: " + scoreToPercent(exScore));
 		// that mess of an expression is basically this.exScore as a percent to one decimal place
 		System.out.println();
 	}
 
 	// set the final grade
-	public void setFinal() {
+	public static void setFinal(hwScore, exScore, console) {
 		System.out.println("Final exam:");
 		System.out.print("    Have you taken the final exam yet? (1 for yes, 2 for no) ");
 		boolean isFinalTaken = strIsYes(console.next());
 		if (!isFinalTaken) {
-			calcFinalReq();
+			calcFinalReq(hwScore, exScore, console);
 			return;
 		}
-		int weight = getInputInteger("What is its weight (0-100)? ", 4);
-		int score = getInputInteger("Exam score: ", 4);
+		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
+		int score = getInputInteger("Exam score: ", 4, console);
 		System.out.print("    Was there a curve? (1 for yes, 2 for no) ");
 		boolean isCurved = strIsYes(console.next());
 		int curve = 0;
 		if (isCurved) 
-			curve = getInputInteger("How much was the curve? ", 4);
-		this.finScore = ((double)weight/100) * Math.min(score+curve, 100)/100;
-		System.out.println("    Weighted exam score: " + scoreToPercent(this.finScore)); //(double)10*((int)this.finScore)/10);
+			curve = getInputInteger("How much was the curve? ", 4, console);
+		finScore = ((double)weight/100) * Math.min(score+curve, 100)/100;
+		System.out.println("    Weighted exam score: " + scoreToPercent(finScore)); //(double)10*((int)this.finScore)/10);
 		// that mess of an expression is basically this.finScore as a percent to one decimal place
 		System.out.println();
-		System.out.println("    Your course grade is " + scoreToPercent(this.score()) );
+		System.out.println("    Your course grade is " + scoreToPercent(score()));
 	}
 
 	// useful if the user wants to do calculations without a final grade	
-	public void calcFinalReq() {
-		int weight = getInputInteger("What is its weight (0-100)? ", 4);
-		int goal = getInputInteger("What percentage would you like to earn in the course? ", 4);
-		double reqWeightedFinal = ((double)goal/100) - this.hwMdScore();
+	public static void calcFinalReq(hwScore, exScore, console) {
+		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
+		int goal = getInputInteger("What percentage would you like to earn in the course? ", 4, console);
+		double reqWeightedFinal = ((double)goal/100) - hwMdScore();
 		double reqFinalScore = reqWeightedFinal / ((double)weight / 100);
-		this.finScore = reqFinalScore;
+		finScore = reqFinalScore;
 		reqFinalScore = scoreToPercent(reqFinalScore);
 		System.out.println();
 		System.out.println("    You need a score of " + reqFinalScore + " on the final exam.");
 		if (reqFinalScore > 100) {
-			this.finScore = (double)weight/100;
+			finScore = (double)weight/100;
 			System.out.println("    Sorry, it is impossible to achieve this percentage.");
-			System.out.println("    The highest percentage you can get is " + scoreToPercent(this.score()));
+			System.out.println("    The highest percentage you can get is " + scoreToPercent(score()));
 		}
 
 	}
@@ -118,39 +108,23 @@ class ClassGrade {
 	}
 
 	// score of combined homework and midterm
-	public double hwMdScore() {
-		return this.exScore + this.hwScore;
+	public double hwMdScore(hwScore, exScore) {
+		return exScore + hwScore;
 	}
 
 	// combined score
 	public double score() {
-		return this.exScore + this.finScore + this.hwScore;
+		return exScore + finScore + hwScore;
 	}
 
 	// error checks a single integer input
-	public static int getInputInteger(String prompt, int padding) {
-		return getInputInteger(prompt, padding, 1)[0];
-	}
-
-	@Deprecated // old method
-	public static int getInputIntegerOld(String prompt, int padding) {
-		String padStr = "";
-		for (int i = 0; i < padding; i++)
-			padStr += " ";
-		System.out.print(padStr + prompt);
-		while (!console.hasNextInt()) {
-			System.out.println(padStr + "Please enter a valid integer...");
-			console.nextLine(); //discard whole line
-			System.out.print(padStr + prompt);
-			if (console.hasNextInt())
-				break;
-		}
-		return console.nextInt();
+	public static int getInputInteger(String prompt, int padding, console) {
+		return getInputInteger(prompt, padding, 1, console)[0];
 	}
 
 	// error checks as many continuous inputs as you want simultaneously
 	// only used in homework
-	public static int[] getInputInteger(String prompt, int padding, int inputsToGet) {
+	public static int[] getInputInteger(String prompt, int padding, int inputsToGet, console) {
 		int[] result = new int[inputsToGet];
 		String padStr = "";
 		for (int i = 0; i < padding; i++)
@@ -195,7 +169,7 @@ class ClassGrade {
 		case "affirmative":
 			result = true;
 			break;
-		case "default":
+		default:
 			result = false; //yes not found
 			break;
 		}
