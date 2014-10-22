@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
-public class OharaProject3 extends ClassGrade {
+public class OharaProject3 {
 
 	public static void main(String[] args) {
 		Scanner console = new Scanner(System.in);
 		printIntro();
 		double hwScore = setHomework(console);
 		double exScore = setMidterm(console);
-		double finScore = setFinal(hwScore, exScore, console);
+		setFinal(hwScore, exScore, console);
 	}
 	
 	public static void printIntro() {
@@ -40,15 +40,16 @@ public class OharaProject3 extends ClassGrade {
 
 	// set the midterm grade
 	public static double setMidterm(Scanner console) {
+		double exScore;
 		System.out.println("Midterm exam:");
-		int weight = getInputInteger("What is its weight (0-100)? ", 4);
-		int score = getInputInteger("Exam score: ", 4);
+		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
+		int score = getInputInteger("Exam score: ", 4, console);
 		System.out.print("    Was there a curve? (1 for yes, 2 for no) ");
 		String curved = console.next();
 		boolean isCurved = strIsYes(curved);
 		int curve = 0;
 		if (isCurved) {
-			curve = getInputInteger("How much was the curve? ", 4);
+			curve = getInputInteger("How much was the curve? ", 4, console);
 		}
 		exScore = ((double)weight * Math.min(score+curve, 100))/10000;
 		System.out.println("    Weighted exam score: " + scoreToPercent(exScore));
@@ -57,7 +58,7 @@ public class OharaProject3 extends ClassGrade {
 	}
 
 	// set the final grade
-	public static void setFinal(hwScore, exScore, console) {
+	public static void setFinal(double hwScore, double exScore, Scanner console) {
 		System.out.println("Final exam:");
 		System.out.print("    Have you taken the final exam yet? (1 for yes, 2 for no) ");
 		boolean isFinalTaken = strIsYes(console.next());
@@ -80,7 +81,8 @@ public class OharaProject3 extends ClassGrade {
 	}
 
 	// useful if the user wants to do calculations without a final grade	
-	public static void calcFinalReq(hwScore, exScore, console) {
+	public static void calcFinalReq(double hwScore, double exScore, Scanner console) {
+		double finScore;
 		int weight = getInputInteger("What is its weight (0-100)? ", 4, console);
 		int goal = getInputInteger("What percentage would you like to earn in the course? ", 4, console);
 		double reqWeightedFinal = ((double)goal/100) - hwMdScore();
@@ -118,13 +120,13 @@ public class OharaProject3 extends ClassGrade {
 	}
 
 	// error checks a single integer input
-	public static int getInputInteger(String prompt, int padding, console) {
+	public static int getInputInteger(String prompt, int padding, Scanner console) {
 		return getInputInteger(prompt, padding, 1, console)[0];
 	}
 
 	// error checks as many continuous inputs as you want simultaneously
 	// only used in homework
-	public static int[] getInputInteger(String prompt, int padding, int inputsToGet, console) {
+	public static int[] getInputInteger(String prompt, int padding, int inputsToGet, Scanner console) {
 		int[] result = new int[inputsToGet];
 		String padStr = "";
 		for (int i = 0; i < padding; i++)
