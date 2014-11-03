@@ -103,7 +103,9 @@ public class OharaProject4 {
 		a = a.toLowerCase();
 		b = b.toLowerCase();
 		// easier than using equalsIgnoreCase() on every comparison
-		if (a.equals("r")) {
+		if (a.equals(b))
+		        return 0;
+	        else if (a.equals("r")) {
 			if (b.equals("s"))
 				return 1;
 			else
@@ -118,8 +120,6 @@ public class OharaProject4 {
 				return 1;
 			else
 				return 2;
-		} else if (a.equals(b)) {
-			return 0;
 		} else //unexpected
 			return -1;
 	}
