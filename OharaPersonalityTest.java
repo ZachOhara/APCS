@@ -13,6 +13,39 @@ public class OharaPersonalityTest {
 		}
 	}
 	
+	public static double getExtrovertIntrovert(String answers) {
+		//TODO: method stub
+	}
+	
+	public static double getSensingiNtuition(String answers) {
+		//TODO: method stub
+	}
+	
+	public static double getThinkingFeeling(String answers) {
+		//TODO: method stub
+	}
+	
+	public static double getJudgingPerceiving(String answers) {
+		//TODO: method stub
+	}
+	
+	public static double getRelevantAnswers(String answers, int[] relevantQs) {
+		String currentAns;
+		int answerA = 0;
+		int answerB = 0;
+		for (int i : releventQs) {
+			currentAns = answers.substring(i-1, i).toLowerCase();
+			if (currentAns.equals("a"))
+				answerA++;
+			else if (currentAns.equals("b"))
+				answerB++;
+			else if (!currentAns.equals("-")) {
+				System.out.println("Unexpected answer: \"" + currentAns + "\". No action taken.");
+			}
+		}
+		return (double)answerA / answerB;
+	}
+	
 	public static String[] getFile(String address) {
 		File f = new File(address);
 		ArrayList<String> output = new ArrayList<String>();
