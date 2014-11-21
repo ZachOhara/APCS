@@ -4,37 +4,69 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OharaPersonalityTest {
-
+	
 	public static void main(String[] args) {
-		String[] surveyResults = getFile("personality.txt");
-		Personality[] people = new Personality[surveyResults.length/2];
-		for (int i = 0; i < people.length; i++) {
-			people[i] = new Personality(surveyResults[i*2]);
+		Scanner console = new Scanner(System.in);
+		String[] surveyResults = null;
+		do {
+			System.out.print("Input file name: ");
+			surveyResults = getFile(console.next());
+			if (surveyResults == null)
+				System.out.print("File not found. ");
+		} while (surveyResults == null);
+		console.close();
+		double[][] personalities = new double[surveyResults.length/2][4];
+		String[] names = new String[surveyResults.length / 2];
+		for (int i = 0; i < personalities.length; i++) {
+			names[i] = surveyResults[i*2];
+			String answers = surveyResults[i*2 + 1];
+			personalities[i][0] = getExtrovertIntrovert(answers);
+			personalities[i][1] = getSensingIntuition(answers);
+			personalities[i][2] = getThinkingFeeling(answers);
+			personalities[i][3] = getJudgingPerceiving(answers);			
 		}
 	}
 	
 	public static double getExtrovertIntrovert(String answers) {
-		//TODO: method stub
+		int[] relevant = new int[10];
+		for (int i = 1; i <= 10; i++)
+			relevant[i - 1] = (i-1)*7 + 1;
+		return getRelevantAnswers(answers, relevant);
 	}
 	
-	public static double getSensingiNtuition(String answers) {
-		//TODO: method stub
+	public static double getSensingIntuition(String answers) {
+		int[] relevant = new int[20];
+		for (int i = 1; i <= 10; i++) {
+			relevant[2*i - 2] = (i-1)*7 + 2;
+			relevant[2*i - 1] = (i-1)*7 + 3;
+		}
+		return getRelevantAnswers(answers, relevant);
 	}
 	
 	public static double getThinkingFeeling(String answers) {
-		//TODO: method stub
+		int[] relevant = new int[20];
+		for (int i = 1; i <= 10; i++) {
+			relevant[2*i - 2] = (i-1)*7 + 4;
+			relevant[2*i - 1] = (i-1)*7 + 5;
+		}
+		return getRelevantAnswers(answers, relevant);
 	}
 	
 	public static double getJudgingPerceiving(String answers) {
-		//TODO: method stub
+		int[] relevant = new int[20];
+		for (int i = 1; i <= 10; i++) {
+			relevant[2*i - 2] = (i-1)*7 + 6;
+			relevant[2*i - 1] = (i-1)*7 + 7;
+		}
+		return getRelevantAnswers(answers, relevant);
 	}
 	
 	public static double getRelevantAnswers(String answers, int[] relevantQs) {
 		String currentAns;
 		int answerA = 0;
 		int answerB = 0;
-		for (int i : releventQs) {
-			currentAns = answers.substring(i-1, i).toLowerCase();
+		for (int i : relevantQs) {
+			currentAns = answers.substring(i-2, i-1).toLowerCase();
 			if (currentAns.equals("a"))
 				answerA++;
 			else if (currentAns.equals("b"))
@@ -57,18 +89,10 @@ public class OharaPersonalityTest {
 			s.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File was not found: " + address);
-			e.printStackTrace();
+			//e.printStackTrace();
+			return null;
 		}
 		return output.toArray(new String[output.size()]);
 	}
 
-}
-
-class Personality {
-	
-	public String name;
-	
-	public Personality(String name)	{
-		this.name = name;
-	}
 }
