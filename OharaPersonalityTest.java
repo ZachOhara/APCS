@@ -77,9 +77,17 @@ public class OharaPersonalityTest {
 				System.out.println("Unexpected answer: \"" + currentAns + "\". No action taken.");
 			}
 		}
-		double[] arr = {answerA, answerB, answerA / answerB};
+		double[] arr = {answerA, answerB, answerB / (answerA + answerB)};
 		return arr;
 	}
+	
+	public static String getAppropriateCharacter(String a, String b, double[] tally) {
+		if (tally[0] > tally[1])
+			return a;
+		else if (tally[0] < tally[1])
+			return b;
+		return "X";
+		}
 	
 	public static String[] getFile(String address) {
 		File f = new File(address);
@@ -108,8 +116,8 @@ public class OharaPersonalityTest {
 		for (int i = 0; i < personalities.length; i++) {
 			output.println(names[i] + ":");
 			for (int j = 0; j < personalities[i].length; j++) {
-				output.println((int)(personalities[i][j][0]) + "A-");
-				output.println((int)(personalities[i][j][1]) + "B ");
+				output.print((int)(personalities[i][j][0]) + "A-");
+				output.print((int)(personalities[i][j][1]) + "B ");
 			}
 			output.println();
 			output.print("[");
@@ -117,6 +125,15 @@ public class OharaPersonalityTest {
 				output.print((int)(personalities[i][j][2] * 100) + "%");
 				if (j + 1 != personalities[i].length)
 					output.print(", ");
+			}
+			output.print("] = ");
+			output.print(getAppropriateCharacter("E", "I", personalities[i][0]));
+			output.print(getAppropriateCharacter("S", "N", personalities[i][1]));
+			output.print(getAppropriateCharacter("T", "F", personalities[i][2]));
+			output.print(getAppropriateCharacter("J", "P", personalities[i][3]));
+			if (i + 1 < personalities.length) { //if not last repetition
+				output.println();
+				output.println();
 			}
 		}
 	}
