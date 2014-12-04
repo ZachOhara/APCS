@@ -30,7 +30,7 @@ public class Point extends ReddingPoint {
 		if (this.isVertical(other)) // yess, efficiency!
 			throw new IllegalArgumentException("Vertial line: slope is unefined");
 		else
-			return (double)(this.x - other.x) / (this.y - other.y);
+			return (double)(this.y - other.y) / (this.x - other.x);
 	}
 	
 	// A simpler way to do this, now that there's more generic code that can be used

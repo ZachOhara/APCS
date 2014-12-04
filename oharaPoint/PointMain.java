@@ -3,12 +3,14 @@ package oharaPoint;
 public class PointMain {
 	
    public static void main(String[] args) {
-      ReddingPoint p3 = new ReddingPoint();
+	  
+	   /*
+      Point p3 = new Point();
       System.out.println(p3);
       
       // create 2 points
-      ReddingPoint p1 = new ReddingPoint(7, 2);
-      ReddingPoint p2 = new ReddingPoint(4, 3);
+      Point p1 = new Point(7, 2);
+      Point p2 = new Point(4, 3);
       
       System.out.println("p1 is (" + p1.getX() + ","
          + p1.getY() + ")");
@@ -23,6 +25,34 @@ public class PointMain {
                
       System.out.println(p1);
       System.out.println(p2);
+      */
+      
+      Point p1 = new Point(1,1);
+      Point p2 = new Point(1,2);
+      Point p3 = new Point(2,2);
+      
+      // testing Point.distance()
+      System.out.println(p1.distance(p2)); // should be 1
+      System.out.println(p2.distance(p3)); // should be 1
+      System.out.println(p1.distance(p3)); // should be sqrt(2)
+      System.out.println();
+      
+      // testing Point.manhattanDistance()
+      System.out.println(p1.manhattanDistance(p2)); // should be 1
+      System.out.println(p2.manhattanDistance(p3)); // should be 1
+      System.out.println(p1.manhattanDistance(p3)); // should be 2
+      System.out.println();
+      
+      // testing Point.isVertical()
+      System.out.println(p1.isVertical(p2)); // should be true
+      System.out.println(p2.isVertical(p3)); // should be false
+      System.out.println(p1.isVertical(p3)); // should be false
+      System.out.println();
+      
+      // testing Point.slope()
+      System.out.println(p1.slope(p3)); // should be 1
+      System.out.println(p2.slope(p3)); // should be 0
+
       
    }
    
