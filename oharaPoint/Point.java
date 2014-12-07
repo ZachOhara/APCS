@@ -39,6 +39,14 @@ public class Point extends ReddingPoint {
 		return this.distance(new Point()); // put the origin in a point object and take the distance from that;
 	}
 	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
 	public Point copyData() {
 		return new Point(this.x, this.y);
 	}
