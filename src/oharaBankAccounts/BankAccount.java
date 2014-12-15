@@ -4,6 +4,7 @@ public class BankAccount {
 
 	private static int objectCount = 0;
 	
+	@SuppressWarnings("unused")
 	private String name;
 	private int id;
 	
