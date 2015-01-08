@@ -102,9 +102,9 @@ public abstract class CubicShape extends Shape {
 			throw new IllegalArgumentException("Compared object must be a CubicShape");
 		else {
 			CubicShape cs = (CubicShape) other;
-			return this.getLength() == other.getLength()
-					&& this.getWidth() == other.getWidth()
-					&& this.getHeight() == other.getHeight();
+			return this.getLength() == cs.getLength()
+					&& this.getWidth() == cs.getWidth()
+					&& this.getHeight() == cs.getHeight();
 		}
 	}
 
