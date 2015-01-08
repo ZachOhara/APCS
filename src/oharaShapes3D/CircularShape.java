@@ -60,8 +60,13 @@ public abstract class CircularShape extends Shape {
 	}
 	
 	// Compare equality of each dimension of two shapes
-	public boolean equals(CircularShape other) {
-		return this.getRadius() == other.getRadius();
+	public boolean equals(Object other) {
+		if (!(other instanceof CircularShape))
+			throw new IllegalArumgentException("Compared object must be of type CircularShape");
+		else {
+			CircularShape cs = (CircularShape) object;
+			return this.getRadius() == cs.getRadius();
+		}
 	}
 
 	
