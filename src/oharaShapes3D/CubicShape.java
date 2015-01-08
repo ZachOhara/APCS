@@ -97,10 +97,15 @@ public abstract class CubicShape extends Shape {
 	}
 
 	// Compare equality of each dimension of two shapes
-	public boolean equals(CubicShape other) {
-		return this.getLength() == other.getLength()
-				&& this.getWidth() == other.getWidth()
-				&& this.getHeight() == other.getHeight();
+	public boolean equals(Object other) {
+		if (!(other instanceof CubicShape))
+			throw new IllegalArgumentException("Compared object must be a CubicShape");
+		else {
+			CubicShape cs = (CubicShape) other;
+			return this.getLength() == other.getLength()
+					&& this.getWidth() == other.getWidth()
+					&& this.getHeight() == other.getHeight();
+		}
 	}
 
 	// Get the String representation of the object
