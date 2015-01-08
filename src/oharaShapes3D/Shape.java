@@ -29,5 +29,12 @@ public abstract class Shape implements Shape3D, Comparable<Shape> {
 				return 0;
 		}
 	}
+	
+	public boolean equals(Object other) {
+		if (!(other instanceof Shape))
+			throw new IllegalArgumentException("Compared object must be of type Shape");
+		else
+			return this.compareTo((Shape) other) == 0;
+	}
 
 }
