@@ -47,8 +47,13 @@ public abstract class CircularShapeWithHeight extends CircularShape {
 	}
 	
 	// Compare equality of each dimension of two shapes
-	public boolean equals(CircularShapeWithHeight other) {
-		return this.getHeight() == other.getHeight() && super.equals(other);
+	public boolean equals(Object other) {
+		if (!(other instanceof CircularShapeWithHeight))
+			throw new IllegalArgumentException("Compared object must be of type CircularObjectWithHeight");
+		else {
+			CircularShapeWithHeight cswh = (CircularShapeWithHeight) other;
+			return this.getHeight() == cswh.getHeight() && super.equals(cswh);
+		}
 	}
 	
 	// Get the String representation of the shape
