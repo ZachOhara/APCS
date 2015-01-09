@@ -95,7 +95,8 @@ public abstract class CubicShape extends Shape {
 		return (2 * this.length * this.width) + (2 * this.length * this.height)
 				+ (2 * this.width * this.height);
 	}
-
+	
+	/* Commented: method in superclass works better
 	// Compare equality of each dimension of two shapes
 	public boolean equals(Object other) {
 		if (!(other instanceof CubicShape))
@@ -107,6 +108,7 @@ public abstract class CubicShape extends Shape {
 					&& this.getHeight() == cs.getHeight();
 		}
 	}
+	*/
 
 	// Get the String representation of the object
 	public String toString() {

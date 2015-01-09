@@ -59,15 +59,17 @@ public abstract class CircularShape extends Shape {
 		return 4 * this.getCrossSectionArea();
 	}
 	
+	/* Commented: method in superclass works better
 	// Compare equality of each dimension of two shapes
 	public boolean equals(Object other) {
 		if (!(other instanceof CircularShape))
-			throw new IllegalArumgentException("Compared object must be of type CircularShape");
+			throw new IllegalArgumentException("Compared object must be of type CircularShape");
 		else {
-			CircularShape cs = (CircularShape) object;
+			CircularShape cs = (CircularShape) other;
 			return this.getRadius() == cs.getRadius();
 		}
 	}
+	*/
 
 	
 	// Get the String representation of the object

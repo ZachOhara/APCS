@@ -46,6 +46,7 @@ public abstract class CircularShapeWithHeight extends CircularShape {
 				+ 2 * this.getCrossSectionArea();
 	}
 	
+	/* Commented: method in superclass works better
 	// Compare equality of each dimension of two shapes
 	public boolean equals(Object other) {
 		if (!(other instanceof CircularShapeWithHeight))
@@ -55,6 +56,7 @@ public abstract class CircularShapeWithHeight extends CircularShape {
 			return this.getHeight() == cswh.getHeight() && super.equals(cswh);
 		}
 	}
+	*/
 	
 	// Get the String representation of the shape
 	public String toString() {
