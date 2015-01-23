@@ -20,7 +20,7 @@ public class OharaABCD {
 		
 		// Remove the 'plus' with incrementing index 
 		
-		for (int i = 2; i < letterList.size(); i += 1) {
+		for (int i = 1; i < letterList.size(); i += 1) {
 			letterList.remove(i);
 		}
 		System.out.println(letterList);	
