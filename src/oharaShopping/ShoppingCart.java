@@ -15,6 +15,7 @@ public class ShoppingCart {
 	public void add(ItemOrder newOrder) {
 		if (this.containsItem(newOrder.getItem()))
 			this.removeItem(newOrder.getItem());
+		this.localList.add(newOrder);
 	}
 	
 	public void setDiscount(boolean b) {
@@ -24,9 +25,11 @@ public class ShoppingCart {
 	public double getTotal() {
 		double discountFactor = this.isDiscount ? 0.9 : 1.0;
 		double total = 0;
-		for (ItemOrder io : this.localList)
+		for (ItemOrder io : this.localList) {
 			total += io.getPrice();
-		return total;// * discountFactor;
+			System.out.println(io + ", " + io.getPrice());
+		}
+		return total * discountFactor;
 	}
 	
 	private boolean containsItem(Item i) {

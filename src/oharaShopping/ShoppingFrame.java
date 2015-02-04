@@ -93,7 +93,7 @@ public class ShoppingFrame extends JFrame {
     // parse the input and update the ShoppingCart.  Display an error
     // message if text is not a number or is negative.
     private void updateItem(Item product, JTextField quantity) {
-    	System.out.println("updating!");
+    	//System.out.println("updating!");
         int number;
         String text = quantity.getText().trim();
         try {
@@ -113,7 +113,7 @@ public class ShoppingFrame extends JFrame {
     // reset the text field for order total
     private void updateTotal() {
         double amount = items.getTotal();
-        System.out.println(amount);
+        System.out.println(items);
         total.setText(NumberFormat.getCurrencyInstance().format(amount));
     }
 }
