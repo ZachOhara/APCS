@@ -1,0 +1,188 @@
+package oharaChatbot.magpie5;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ * A program to carry on conversations with a human user.
+ * This version:
+ *<ul><li>
+ * 		Uses advanced search for keywords 
+ *</li><li>
+ * 		Will transform statements as well as react to keywords
+ *</li></ul>
+ * This version uses an array to hold the default responses.
+ * @author Laurie White
+ * @version April 2012
+ */
+public class Magpie5
+{
+
+	private static final String[] negativityTriggers = {"no"};
+	private static final String[] familyTriggers = {"mother", "mom", "father", "dad", "sister", "brother"};
+	private static final String[] wantingTriggers = {"I want"};
+	private static final String[] wantingToTriggers = {"I want to"};
+
+	private static final String[] randomResponses = {
+		"Interesting, tell me more",
+		"Hmmm.",
+		"Do you really think so?",
+		"You don't say."
+	};
+	private static final ArrayList<String> randomResponseList = new ArrayList<String>();
+
+
+	/**
+	 * Get a default greeting 	
+	 * @return a greeting
+	 */	
+	public String getGreeting()	{
+		return "Hello, let's talk.";
+	}
+
+	/**
+	 * Gives a response to a user statement
+	 * @param statement the user statement
+	 * @return a response based on the rules given
+	 */
+	public String getResponse(String statement)	{
+		String response = "";
+		if (statement.length() == 0)
+			response = "Say something, please.";
+
+		else if (mentions(statement, negativityTriggers))
+			response = "Why so negative?";
+
+		else if (mentions(statement, familyTriggers))
+			response = "Tell me more about your family.";
+
+		else if (mentions(statement, wantingToTriggers))
+			response = transformIWantToStatement(statement);
+
+		else if (mentions(statement, wantingTriggers))
+			response = transformIWantStatement(statement);
+
+		else {
+
+			int pos = findKeyword(statement, "you", 0);
+
+			if (pos >= 0 && findKeyword(statement, "me", pos) >= 0)
+				response = transformYouMeStatement(statement);
+			else {
+				pos = findKeyword(statement, "i", 0);
+				if (pos >= 0 && findKeyword(statement, "you", pos) >= 0)
+					response = transformIYouStatement(statement);
+				else
+					response = getRandomResponse();
+			}
+		}
+		return response;
+	}
+
+	private static String transformIWantToStatement(String statement) {
+		return transformToQuestion(statement, "I want to", "What would it mean to");
+	}
+
+	private static String transformIWantStatement(String statement) {
+		return transformToQuestion(statement, "I want", "Would you really be happy if you had");
+	}
+
+	private static String transformYouMeStatement(String statement) {
+		return transformQuestionTense(statement, "you", "me", "What makes you think that I", "you");
+	}
+
+	private static String transformIYouStatement(String statement)	{
+		return transformQuestionTense(statement, "I", "you", "Why do you", "me");
+	}
+
+	private static String transformToQuestion(String statement, String keyword, String question) {
+		statement = removeFinalPeriod(statement);
+		int pos = findKeyword(statement, keyword, 0);
+		String rest = statement.substring(pos + keyword.length()).trim();
+		return question + " " + rest + "?";
+	}
+	
+	private static String transformQuestionTense(String s, String key1, String key2, String question, String endTense) {
+		s = removeFinalPeriod(s);
+		int pos1 = findKeyword(s, key1);
+		int pos2 = findKeyword(s, key2);
+		String rest = s.substring(pos1 + key1.length(), pos2).trim();
+		return question + " " + rest + " " + endTense + "?";
+	}
+
+	private static int findKeyword(String statement, String goal, int startPos)	{
+		String phrase = statement.trim().toLowerCase();
+		goal = goal.toLowerCase();
+
+		// The only change to incorporate the startPos is in
+		// the line below
+		int pos = phrase.indexOf(goal, startPos);
+
+		// Refinement--make sure the goal isn't part of a
+		// word
+		while (pos >= 0)
+		{
+			// Find the string of length 1 before and after
+			// the word
+			String before = " ", after = " ";
+			if (pos > 0)
+			{
+				before = phrase.substring(pos - 1, pos);
+			}
+			if (pos + goal.length() < phrase.length())
+			{
+				after = phrase.substring(
+						pos + goal.length(),
+						pos + goal.length() + 1);
+			}
+
+			// If before and after aren't letters, we've
+			// found the word
+			if (((before.compareTo("a") < 0) || (before
+					.compareTo("z") > 0)) // before is not a
+					// letter
+					&& ((after.compareTo("a") < 0) || (after
+							.compareTo("z") > 0)))
+			{
+				return pos;
+			}
+
+			// The last position didn't work, so let's find
+			// the next, if there is one.
+			pos = phrase.indexOf(goal, pos + 1);
+
+		}
+
+		return -1;
+	}
+	
+	private static int findKeyword(String statement, String goal) {
+		return findKeyword (statement, goal, 0);
+	}
+
+	private static String getRandomResponse () {
+		if (randomResponseList.size() == 0)
+			randomResponseList.addAll(Arrays.asList(randomResponses));
+		return randomResponseList.get((int)(Math.random() * randomResponseList.size()));
+	}
+	
+	private boolean mentions(String phrase, String[] triggers) {
+		return mentionIndex(phrase, triggers) != -1;
+	}
+
+	private int mentionIndex(String phrase, String[] triggers) {
+		for (int i = 0; i < triggers.length; i++)
+			if (findKeyword(phrase, triggers[i]) != -1)
+				return i;
+		return -1;
+	}
+
+	private static String removeFinalPeriod(String s) {
+		s = s.trim();
+		String lastChar = s.substring(s.length() - 1);
+		if (lastChar.equals("."))
+			s = s.substring(0, s.length() - 1);
+		return s;
+	}
+
+}

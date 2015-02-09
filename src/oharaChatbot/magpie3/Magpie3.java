@@ -1,78 +1,96 @@
 package oharaChatbot.magpie3;
 
-/**
- * A program to carry on conversations with a human user.
- * This version: 
- * <ul><li>
- *    Uses advanced search for keywords 
- * </li></ul> 
- *    
- * @author Laurie White
- * @version April 2012
- */
-public class Magpie3
-{
+public class Magpie3 {
 	/**
-	 * Get a default greeting
-	 * 
+	 * Get a default greeting 	
 	 * @return a greeting
 	 */
+	
+	private static final String[] negativityTriggers = {"no"};
+	private static final String[] familyTriggers = {"mother", "mom", "father", "dad", "sister", "brother"};
+	private static final String[] petTriggers = {"dog", "cat"};
+	private static final String[] teacherTriggers = {"mr.", "mrs.", "ms."};
+	private static final String[] zachTriggers = {"zach", "ohara", "o'hara"};
+	
+	private static final String[] teacherPronouns = {"He", "She", "She"};
+	
 	public String getGreeting()
 	{
 		return "Hello, let's talk.";
 	}
-
+	
 	/**
 	 * Gives a response to a user statement
 	 * 
-	 * @param statement
+	 * @param input
 	 *            the user statement
 	 * @return a response based on the rules given
 	 */
-	public String getResponse(String statement)
+	public String getResponse(String input)
 	{
 		String response = "";
-		if (statement.length() == 0)
-		{
+		input = input.toLowerCase();
+		if (input.trim().length() == 0)
 			response = "Say something, please.";
-		}
-		else if (findKeyword(statement, "no") >= 0)
-		{
+		else if (mentions(input, negativityTriggers))
 			response = "Why so negative?";
-		}
-		else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0)
-		{
+		else if (mentions(input, familyTriggers))
 			response = "Tell me more about your family.";
-		}
+		else if (mentions(input, petTriggers))
+			response = "Tell me more about your pets";
+		else if (mentions(input, teacherTriggers))
+			response = teacherPronouns[mentionIndex(input, teacherTriggers)]
+					+ " sounds like a good teacher.";
+		else if (mentions(input, zachTriggers))
+			response = "That name! That's my programmer";
 		else
-		{
 			response = getRandomResponse();
-		}
 		return response;
 	}
 
 	/**
-	 * Search for one word in phrase. The search is not case
-	 * sensitive. This method will check that the given goal
-	 * is not a substring of a longer string (so, for
-	 * example, "I know" does not contain "no").
-	 *
-	 * @param statement
-	 *            the string to search
-	 * @param goal
-	 *            the string to search for
-	 * @param startPos
-	 *            the character of the string to begin the
-	 *            search at
-	 * @return the index of the first occurrence of goal in
-	 *         statement or -1 if it's not found
+	 * Pick a default response to use if nothing else fits.
+	 * @return a non-committal string
 	 */
-	private int findKeyword(String statement, String goal,
-			int startPos)
+	private String getRandomResponse()
 	{
+		final int NUMBER_OF_RESPONSES = 4;
+		double r = Math.random();
+		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
+		String response = "";
+		
+		if (whichResponse == 0)
+		{
+			response = "Interesting, tell me more.";
+		}
+		else if (whichResponse == 1)
+		{
+			response = "Hmmm.";
+		}
+		else if (whichResponse == 2)
+		{
+			response = "Do you really think so?";
+		}
+		else if (whichResponse == 3)
+		{
+			response = "You don't say.";
+		}
+
+		return response;
+	}
+	
+	private static boolean mentions(String phrase, String[] triggers) {
+		return mentionIndex(phrase, triggers) != -1;
+	}
+	
+	private static int mentionIndex(String phrase, String[] triggers) {
+		for (int i = 0; i < triggers.length; i++)
+			if (findKeyword(phrase, triggers[i]) != -1)
+				return i;
+		return -1;
+	}
+
+	private static int findKeyword(String statement, String goal, int startPos)	{
 		String phrase = statement.trim().toLowerCase();
 		goal = goal.toLowerCase();
 
@@ -132,41 +150,9 @@ public class Magpie3
 	 * @return the index of the first occurrence of goal in
 	 *         statement or -1 if it's not found
 	 */
-	private int findKeyword(String statement, String goal)
+	private static int findKeyword(String statement, String goal)
 	{
 		return findKeyword(statement, goal, 0);
 	}
-
-	/**
-	 * Pick a default response to use if nothing else fits.
-	 * 
-	 * @return a non-committal string
-	 */
-	private String getRandomResponse()
-	{
-		final int NUMBER_OF_RESPONSES = 4;
-		double r = Math.random();
-		int whichResponse = (int) (r * NUMBER_OF_RESPONSES);
-		String response = "";
-
-		if (whichResponse == 0)
-		{
-			response = "Interesting, tell me more.";
-		}
-		else if (whichResponse == 1)
-		{
-			response = "Hmmm.";
-		}
-		else if (whichResponse == 2)
-		{
-			response = "Do you really think so?";
-		}
-		else if (whichResponse == 3)
-		{
-			response = "You don't say.";
-		}
-
-		return response;
-	}
-
+	
 }
