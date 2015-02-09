@@ -2,19 +2,23 @@ package oharaShopping;
 
 public class Item {
 	
+	/**
+	 * Represents an entry of a single item, including the price, and
+	 * the bulk price for the item. Does not store quantity.
+	 */
+	
 	private String name;
 	private double price;
 	private int bulkQuantity;
 	private double bulkPrice;
 	
-	public Item(String name, double price) {
-		this(name, price, 0, 0);
-	}
-	
-	public Item(Item other) {
-		this(other.name, other.price, other.bulkQuantity, other.bulkPrice);
-	}
-	
+	/**
+	 * Construct a new Item listing with a name, a price, and a bulk deal (x amount for $y cost)
+	 * @param name The name of the item
+	 * @param price The price of one of the item
+	 * @param bulkQu The quantity required to pay for the item in bulk
+	 * @param bulkPr The price to buy the bulk quantity of the item.
+	 */
 	public Item(String name, double price, int bulkQu, double bulkPr) {
 		if (price < 0)
 			throw new IllegalArgumentException("Price cannot be negative");
@@ -24,6 +28,29 @@ public class Item {
 		this.bulkPrice = bulkPr;
 	}
 	
+	/**
+	 * Construct a new Item listing with only a name and price, and no bulk option
+	 * @param name The name of the item
+	 * @param price The price of one of the item
+	 */
+	public Item(String name, double price) {
+		this(name, price, 0, 0);
+	}
+	
+	/**
+	 * Construct a new Item listing by copying another Item object
+	 * @param other The Item object to be copied
+	 */
+	public Item(Item other) {
+		this(other.name, other.price, other.bulkQuantity, other.bulkPrice);
+	}
+	
+	/**
+	 * Calculate the cost for a given quantity of this item. Use the
+	 * bulk price if applicable
+	 * @param quantity The quantity of the item to buy
+	 * @return The cost of the given quantity of this item
+	 */
 	public double priceFor(int quantity) {
 		if (quantity < 0)
 			throw new IllegalArgumentException("Quantity cannot be negative");
@@ -41,11 +68,6 @@ public class Item {
 		if (this.bulkQuantity != 0)
 			result += "(" + this.bulkQuantity + " for " + String.format("%.2f", this.bulkPrice) + ")";
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		Item i = new Item("silly putty", 3.95, 10, 19.99);
-		System.out.println(i.priceFor(20));
 	}
 
 }

@@ -7,21 +7,36 @@ public class ShoppingCart {
 	private ArrayList<ItemOrder> localList;
 	private boolean isDiscount;
 
+	/**
+	 * Construct a new, empty, shopping cart
+	 */
 	public ShoppingCart() {
 		this.localList = new ArrayList<ItemOrder>();
 		this.isDiscount = false;
 	}
 	
+	/**
+	 * Add an item order to the cart
+	 * @param newOrder The IemOrder to be added
+	 */
 	public void add(ItemOrder newOrder) {
 		if (this.containsItem(newOrder.getItem()))
 			this.removeItem(newOrder.getItem());
 		this.localList.add(newOrder);
 	}
 	
+	/**
+	 * Set whether to apply a 10% discount on the final price
+	 * @param b {@code true} to use the discount; {@code false} to pay full price
+	 */
 	public void setDiscount(boolean b) {
 		this.isDiscount = b;
 	}
 	
+	/**
+	 * Calculate the total cost of the orders in the cart
+	 * @return The combined cost of all orders
+	 */
 	public double getTotal() {
 		double discountFactor = this.isDiscount ? 0.9 : 1.0;
 		double total = 0;
