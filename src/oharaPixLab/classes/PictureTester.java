@@ -163,7 +163,16 @@ public class PictureTester
 	public static void testCollage()
 	{
 		Picture canvas = new Picture("640x480.jpg");
-		canvas.createCollage();
+		canvas.explore();
+		canvas.myCollage();
+		canvas.explore();
+	}
+	
+	/** Method to test the copy method */
+	public static void testCopy() {
+		Picture canvas = new Picture("640x480.jpg");
+		canvas.explore();
+		canvas.copy(new Picture("beach.jpg"), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
 		canvas.explore();
 	}
 
@@ -171,7 +180,7 @@ public class PictureTester
 	public static void testEdgeDetection()
 	{
 		Picture swan = new Picture("swan.jpg");
-		swan.edgeDetection(10);
+		swan.edgeDetection(20);
 		swan.explore();
 	}
 
@@ -196,15 +205,15 @@ public class PictureTester
 		testMirrorHorizontal();
 		testMirrorHorizontalBotToTop();
 		testMirrorDiagonal();
-		*/
-//		testMirrorTemple();
-//		testMirrorArms();
+		testMirrorTemple();
+		testMirrorArms();
 		testMirrorGull();
-		//testMirrorDiagonal();
-		//testCollage();
-		//testCopy();
-		//testEdgeDetection();
-		//testEdgeDetection2();
+		testMirrorDiagonal();
+		*/
+//		testCollage();
+//		testCopy();
+		testEdgeDetection();
+//		testEdgeDetection2();
 		//testChromakey();
 		//testEncodeAndDecode();
 		//testGetCountRedOverValue(250);

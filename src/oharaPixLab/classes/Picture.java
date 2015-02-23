@@ -80,12 +80,12 @@ public class Picture extends SimplePicture
 				+ " width " + getWidth();
 		return output;
 	}
-	
+
 	/** Method to set the red to 0 */
 	public void zeroRed() {
 		this.setPixels(0, -1, -1);
 	}
-	
+
 	/** Method to set the green to 0 */
 	public void zeroGreen() {
 		this.setPixels(-1, 0, -1);
@@ -95,22 +95,22 @@ public class Picture extends SimplePicture
 	public void zeroBlue() {
 		this.setPixels(-1, -1, 0);
 	}
-	
+
 	/** Method to set the green and blue to 0 */
 	public void keepOnlyRed() {
 		this.setPixels(-1, 0, 0);
 	}
-	
+
 	/** Method to set the red and blue to 0 */
 	public void keepOnlyGreen() {
 		this.setPixels(0, -1, 0);
 	}
-	
+
 	/** Method to set the red and green to 0 */
 	public void keepOnlyBlue() {
 		this.setPixels(0, 0, -1);
 	}
-	
+
 	/** Private method to set all pixels to the given values. -1 for unchanged */
 	private void setPixels(int r, int g, int b) {
 		for (Pixel[] rowArray : this.getPixels2D()) {
@@ -124,7 +124,7 @@ public class Picture extends SimplePicture
 			}
 		}
 	}
-	
+
 	/** Method to set the pixels to their opposite colors */
 	public void negate() {
 		for (Pixel[] rowArray : this.getPixels2D()) {
@@ -135,7 +135,7 @@ public class Picture extends SimplePicture
 			}
 		}
 	}
-	
+
 	/** Method to set the pixels to a corresponding shade of gray */
 	public void grayscale() {
 		for (Pixel[] rowArray : this.getPixels2D()) {
@@ -148,15 +148,15 @@ public class Picture extends SimplePicture
 			}
 		}
 	}
-	
+
 	/* Commented because currently unused, but no want delete
 	private static int getBrightness(Pixel p) {
 		int average = p.getRed() + p.getGreen() + p.getBlue();
 		average /= 3;
 		return average;
 	}
-	*/
-	
+	 */
+
 	/** Method to fix an 'underwater' image */
 	public void fixUnderwater() {
 		int minRed = 255;
@@ -170,7 +170,7 @@ public class Picture extends SimplePicture
 			}
 		this.addPixels(-minRed, -minGreen, -minBlue);
 	}
-	
+
 	/** Method to fully saturate an image */
 	public void saturate() {
 		int maxRed = 0;
@@ -185,12 +185,12 @@ public class Picture extends SimplePicture
 		int max = Math.max(Math.max(maxRed, maxGreen), maxBlue);
 		this.saturate((double)255 / max);
 	}
-	
+
 	/** Method to saturate an image by a given factor */
 	public void saturate(double f) {
 		this.multiplyPixels(f, f, f);
 	}
-	
+
 	/** Private method to multiply pixel values by given factors */
 	private void multiplyPixels(double r, double g, double b) {
 		for (Pixel[] rowArray : this.getPixels2D()) {
@@ -201,7 +201,7 @@ public class Picture extends SimplePicture
 			}
 		}
 	}
-	
+
 	/** Private method to add a given value to each pixel color */
 	private void addPixels(int r, int g, int b) {
 		for (Pixel[] rowArray : this.getPixels2D()) {
@@ -228,7 +228,7 @@ public class Picture extends SimplePicture
 	{
 		this.mirrorVertical(false);
 	}
-	
+
 	private void mirrorVertical(boolean isLeftToRight) {
 		Pixel[][] pixels = this.getPixels2D();
 		Pixel leftPixel = null;
@@ -263,7 +263,7 @@ public class Picture extends SimplePicture
 	{
 		this.mirrorHorizontal(false);
 	}
-	
+
 	private void mirrorHorizontal(boolean isTopToBottom) {
 		Pixel[][] pixels = this.getPixels2D();
 		Pixel topPixel = null;
@@ -282,7 +282,7 @@ public class Picture extends SimplePicture
 			}
 		} 
 	}
-	
+
 	/** Method that mirrors the picture around a 
 	 * diagonal mirror (drawn from top-left to
 	 * bottom-right) in the center of the picture
@@ -311,19 +311,19 @@ public class Picture extends SimplePicture
 		// extension: -263
 		this.mirrorVertical(276, -263, 27, 97);
 	}
-	
+
 	/** Method to mirror the arms of the snowman */
 	public void mirrorArms() {
 		this.mirrorVertical(206, -105, 155, 300);
 		this.mirrorHorizontal(194, -40, 95, 315);
 	}
-	
+
 	/** Method to mirror the seagull into a double-gull */
 	public void mirrorGull() {
 		this.mirrorVertical();
 		// I never guessed it would be this easy...
 	}
-	
+
 	private void mirrorVertical(int mirrorPoint, int extendFrom, int topRow, int bottomRow) {
 		int count = 0;
 		Pixel leftPixel = null;
@@ -338,7 +338,7 @@ public class Picture extends SimplePicture
 			}
 		System.out.println(count);
 	}
-	
+
 	private void mirrorHorizontal(int mirrorPoint, int extendFrom, int lCol, int rCol) {
 		int count = 0;
 		Pixel topPixel = null;
@@ -354,35 +354,36 @@ public class Picture extends SimplePicture
 		System.out.println(count);
 	}
 
-	/** copy from the passed fromPic to the
+	/** Copy from the passed fromPic to the
 	 * specified startRow and startCol in the
 	 * current picture
 	 * @param fromPic the picture to copy from
 	 * @param startRow the start row to copy to
 	 * @param startCol the start col to copy to
 	 */
-	public void copy(Picture fromPic, 
-			int startRow, int startCol)
-	{
-		Pixel fromPixel = null;
-		Pixel toPixel = null;
-		Pixel[][] toPixels = this.getPixels2D();
-		Pixel[][] fromPixels = fromPic.getPixels2D();
-		for (int fromRow = 0, toRow = startRow; 
-				fromRow < fromPixels.length &&
-				toRow < toPixels.length; 
-				fromRow++, toRow++)
-		{
-			for (int fromCol = 0, toCol = startCol; 
-					fromCol < fromPixels[0].length &&
-					toCol < toPixels[0].length;  
-					fromCol++, toCol++)
-			{
-				fromPixel = fromPixels[fromRow][fromCol];
-				toPixel = toPixels[toRow][toCol];
-				toPixel.setColor(fromPixel.getColor());
+	public void copy(Picture fromPic, int startRow, int startCol) {
+		this.copy(fromPic, startRow, startRow + fromPic.getHeight(), startCol, startCol + fromPic.getWidth());
+	}
+
+	/**Copy from the passed fromPic to the
+	 * specified startRow and startCol in the
+	 * current picture
+	 * 
+	 * @param fromPic the picture to copy from
+	 * @param startRow the start row to copy to
+	 * @param endRow the end row to copy to
+	 * @param startCol the start column to copy to
+	 * @param endCol the end column to copy to
+	 */
+	public void copy(Picture fromPic, int startRow, int endRow, int startCol, int endCol) {
+		Pixel[][] toPix = this.getPixels2D();
+		Pixel[][] fromPix = fromPic.getPixels2D();
+		endRow = minimize(endRow, startRow + fromPic.getHeight(), this.getHeight());
+		endCol = minimize(endCol, startCol + fromPic.getWidth(), this.getWidth());
+		for (int row = startRow; row < endRow; row++)
+			for (int col = startCol; col < endCol; col++) {
+				toPix[row][col].setColor(fromPix[row - startRow][col - startCol].getColor());
 			}
-		}   
 	}
 
 	/** Method to create a collage of several pictures */
@@ -402,33 +403,46 @@ public class Picture extends SimplePicture
 		this.write("collage.jpg");
 	}
 
+	/** Method to create a second collage of several pictures */
+	public void myCollage() {
+		Picture flower1 = new Picture("flower1.jpg");
+		Picture flower2 = new Picture("flower2.jpg");
+		this.copy(flower1, 0, 50, 0, 50);
+		this.copy(flower2, 100, 150, 0, 50);
+		this.copy(flower1, 200, 250, 0, 50);
+		this.copy(flower2, 300, 350, 0, 50);
+		this.copy(flower1, 400, 450, 0, 50);
+		this.copy(flower2, 500, 550, 0, 50);
+		this.mirrorVertical();
+		this.write("myCollage.jpg");
+	}
 
 	/** Method to show large changes in color 
 	 * @param edgeDist the distance for finding edges
 	 */
 	public void edgeDetection(int edgeDist)
 	{
+		Pixel centerPixel = null;
 		Pixel leftPixel = null;
-		Pixel rightPixel = null;
+		Pixel bottomPixel = null;
 		Pixel[][] pixels = this.getPixels2D();
 		Color rightColor = null;
-		for (int row = 0; row < pixels.length; row++)
-		{
-			for (int col = 0; 
-					col < pixels[0].length-1; col++)
-			{
-				leftPixel = pixels[row][col];
-				rightPixel = pixels[row][col+1];
-				rightColor = rightPixel.getColor();
-				if (leftPixel.colorDistance(rightColor) > 
-				edgeDist)
-					leftPixel.setColor(Color.BLACK);
+		Color dc = null;
+		for (int row = 0; row < pixels.length - 1; row++) {
+			for (int col = 0; col < pixels[0].length - 1; col++) {
+				centerPixel = pixels[row][col];
+				leftPixel = pixels[row][col+1];
+				bottomPixel = pixels[row+1][col];
+				rightColor = leftPixel.getColor();
+				dc = bottomPixel.getColor();
+				if (centerPixel.colorDistance(rightColor) > edgeDist
+						|| centerPixel.colorDistance(dc) > edgeDist)
+					centerPixel.setColor(Color.BLACK);
 				else
-					leftPixel.setColor(Color.WHITE);
+					centerPixel.setColor(Color.WHITE);
 			}
 		}
 	}
-
 
 	/* Main method for testing - each class in Java can have a main 
 	 * method 
@@ -441,4 +455,11 @@ public class Picture extends SimplePicture
 		beach.explore();
 	}
 
-} // this } is the end of class Picture, put all new methods before this
+	/**
+	 * @return the minimum of the three numbers
+	 */
+	private static int minimize(int a, int b, int c) {
+		return Math.min(a, Math.min(b, c));
+	}
+
+}
