@@ -452,8 +452,10 @@ public class SimplePicture implements DigitalPicture
 	 * @param fileName the file name to use to load the picture from
 	 * @throws IOException if the picture isn't found
 	 */
-	public void loadOrFail(String fileName) throws IOException
+	public void loadOrFail_DEF(String fileName) throws IOException
 	{
+		// set the current picture's file name
+		this.fileName = fileName;
 
 		// set the extension
 		int posDot = fileName.indexOf('.');
@@ -463,8 +465,8 @@ public class SimplePicture implements DigitalPicture
 		// if the current title is null use the file name
 		if (title == null)
 			title = fileName;
-		
-		File file = getFilePathOf(fileName);
+
+		File file = new File(this.fileName);
 
 		if (!file.canRead()) 
 		{
@@ -482,6 +484,39 @@ public class SimplePicture implements DigitalPicture
 
 
 	/**
+	 * Method to load the picture from the passed file name
+	 * @param fileName the file name to use to load the picture from
+	 * @throws IOException if the picture isn't found
+	 */
+	public void loadOrFail(String fileName) throws IOException
+	{
+
+		// set the extension
+		int posDot = fileName.indexOf('.');
+		if (posDot >= 0)
+			this.extension = fileName.substring(posDot + 1);
+
+		// if the current title is null use the file name
+		if (title == null)
+			title = fileName;
+
+		File file = getFilePathOf(fileName);
+
+		if (!file.canRead()) 
+		{
+			// try adding the media path 
+			file = new File(FileChooser.getMediaPath(this.fileName));
+			if (!file.canRead())
+			{
+				throw new IOException(this.fileName +
+						" could not be opened. Check that you specified the path");
+			}
+		}
+
+		bufferedImage = ImageIO.read(file);
+	}
+
+	/**
 	 * Method to read the contents of the picture from a filename  
 	 * without throwing errors
 	 * @param fileName the name of the file to write the picture to
@@ -490,8 +525,13 @@ public class SimplePicture implements DigitalPicture
 	public boolean load(String fileName)
 	{
 		try {
-			this.loadOrFail(fileName);
-			return true;
+			try {
+				this.loadOrFail_DEF(fileName);
+				return true;
+			} catch (Exception ex) {
+				this.loadOrFail(fileName);
+				return true;
+			}
 
 		} catch (Exception ex) {
 			System.out.println("There was an error trying to open " + fileName);
@@ -628,6 +668,42 @@ public class SimplePicture implements DigitalPicture
 	 * the passed name
 	 * @param fileName the name of the file to write the picture to
 	 */
+	public void writeOrFail_DEF(String fileName) throws IOException
+	{
+		String extension = this.extension; // the default is current
+
+		// create the file object
+		File file = new File(fileName);
+		File fileLoc = file.getParentFile(); // directory name
+
+		// if there is no parent directory use the current media dir
+		if (fileLoc == null)
+		{
+			fileName = FileChooser.getMediaPath(fileName);
+			file = new File(fileName);
+			fileLoc = file.getParentFile(); 
+		}
+
+		// check that you can write to the directory 
+		if (!fileLoc.canWrite()) {
+			throw new IOException(fileName +
+					" could not be opened. Check to see if you can write to the directory.");
+		}
+
+		// get the extension
+		int posDot = fileName.indexOf('.');
+		if (posDot >= 0)
+			extension = fileName.substring(posDot + 1);
+
+		// write the contents of the buffered image to the file as jpeg
+		ImageIO.write(bufferedImage, extension, file);
+	}
+
+	/**
+	 * Method to write the contents of the picture to a file with 
+	 * the passed name
+	 * @param fileName the name of the file to write the picture to
+	 */
 	public void writeOrFail(String fileName) throws IOException
 	{
 		String extension = this.extension; // the default is current
@@ -669,8 +745,13 @@ public class SimplePicture implements DigitalPicture
 	public boolean write(String fileName)
 	{
 		try {
-			this.writeOrFail(fileName);
-			return true;
+			try {
+				this.writeOrFail_DEF(fileName);
+				return true;
+			} catch (Exception ex) {
+				this.writeOrFail(fileName);
+				return true;
+			}
 		} catch (Exception ex) {
 			System.out.println("There was an error trying to write " + fileName);
 			ex.printStackTrace();
@@ -744,13 +825,13 @@ public class SimplePicture implements DigitalPicture
 	{
 		return getTransformEnclosingRect(trans);
 	}
-	
-	 /**
-	  * Private method to return a file object representing the given filename,
-	  * assuming that the file is in the ../images/ folder
-	  * @param filename The file to look for (should be /images/\<filename\>)
-	  * @return a file object object of the image or file
-	  */
+
+	/**
+	 * Private method to return a file object representing the given filename,
+	 * assuming that the file is in the ../images/ folder
+	 * @param filename The file to look for (should be /images/\<filename\>)
+	 * @return a file object object of the image or file
+	 */
 	private File getFilePathOf(String filename) {
 		String path = this.getClass().getResource("SimplePicture.class").getFile();
 		while (path.indexOf("/classes/") != -1) {
