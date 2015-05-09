@@ -43,32 +43,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-/LastnameStrings.class
-/OharaForLoopsPractice.class
-/OharaIfElseEquals.class
-/OharaIfElseExercisesPart2.class
-/OharaLaterns.class
-/OharaLaterns2.class
-/OharaNewIfElseExercises.class
-/OharaProject3.class
-/OharaRocket.class
-/OharaScanner.class
-/OharaSong.class
-/OharaSongOrig.class
-/OharaSpaceNeedle.class
-/OharaStrings.class
-/OharaRhymeAlliterate.class
-/OharaBills.class
-/OharaBoolean.class
-/OharaMidpoint.class
-/OharaProject4.class
-/OharaWhile.class
-/OharaRockPaperScissors.class
-/Difficulty.class
-/OharaTallying.class
-/OharaArray2D.class
-/OharaArrayMethods.class
-/OharaArrayPR.class
-/OharaMoreArrays.class
-/OharaPersonalityTest.class
-/Personality.class
+
+*.class
