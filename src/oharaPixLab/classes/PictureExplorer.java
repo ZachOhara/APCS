@@ -157,8 +157,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 		this.pictureFrame = new JFrame(); // create the JFrame
 		this.pictureFrame.setResizable(true); // allow the user to resize it
 		this.pictureFrame.getContentPane().setLayout(new BorderLayout()); // use
-																			// border
-																			// layout
+		// border
+		// layout
 		this.pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // when
 		// close
 		// stop

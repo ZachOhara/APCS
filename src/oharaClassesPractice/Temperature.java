@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
 public class Temperature extends JFrame implements ActionListener {
 
 	/**

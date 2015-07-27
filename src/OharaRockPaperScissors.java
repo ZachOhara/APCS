@@ -33,6 +33,7 @@ public class OharaRockPaperScissors {
 
 	public static Scanner console = new Scanner(System.in);
 	public static int[] userInputs = new int[3]; // times the user has selected
+
 	// {rock, paper scissors}
 
 	public static void main(String[] args) {
@@ -67,7 +68,7 @@ public class OharaRockPaperScissors {
 			} catch (InputMismatchException e) {
 				System.out.println("Invalid input; must be an integer");
 				OharaRockPaperScissors.console.nextLine(); // ignore the non-integer, and
-															// remove it
+				// remove it
 				// from the heap
 			}
 		} while ( !success);

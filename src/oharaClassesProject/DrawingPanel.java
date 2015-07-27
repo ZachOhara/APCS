@@ -268,7 +268,7 @@ WindowListener {
 		synchronized (this.getClass()) {
 			DrawingPanel.instances++;
 			this.instanceNumber = DrawingPanel.instances; // each DrawingPanel stores its
-															// own int
+			// own int
 			// number
 
 			if (DrawingPanel.shutdownThread == null && !DrawingPanel.usingDrJava()) {
@@ -2239,8 +2239,8 @@ WindowListener {
 						// encountered?
 						this.transparentIndex = this.ciCount; // record its index
 					} else if (argb != this.theColors[this.transparentIndex]) // different
-					// pixel
-					// value?
+						// pixel
+						// value?
 					{
 						// collapse all transparent pixels into one color index
 						ci_pixels[i] = (byte) this.transparentIndex;
@@ -2539,7 +2539,7 @@ WindowListener {
 			this.writeGraphicControlExtension(os, epluribus, transparent_index);
 			this.writeImageDescriptor(os);
 			new GifPixelsEncoder(this.theWidth, this.theHeight, this.ciPixels, this.isInterlaced, color_depth)
-					.encode(os);
+			.encode(os);
 		}
 
 		// ----------------------------------------------------------------------------

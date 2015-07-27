@@ -24,12 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-@SuppressWarnings("serial")
 public class ShoppingFrame extends JFrame {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 	private ShoppingCart items;
 	private JTextField total;
