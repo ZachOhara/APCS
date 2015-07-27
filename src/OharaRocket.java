@@ -1,6 +1,5 @@
-
 public class OharaRocket {
-
+	
 	public static int scale = 3;
 	
 	public static void main(String[] args) {
@@ -21,8 +20,8 @@ public class OharaRocket {
 	}
 	
 	public static void drawCone() {
-		for (int i = 1; i <= 2 * scale -1; i++) {
-			for (int j = 1; j <=  2 * scale - i; j++)
+		for (int i = 1; i <= 2 * scale - 1; i++) {
+			for (int j = 1; j <= 2 * scale - i; j++)
 				System.out.print(" ");
 			for (int j = 0; j < i; j++)
 				System.out.print("/");
@@ -57,9 +56,9 @@ public class OharaRocket {
 		String slashes = "";
 		for (int j = 1; j <= scale - i; j++)
 			dots += ".";
-		for (int j = 1; j <= i ; j++)
+		for (int j = 1; j <= i; j++)
 			slashes += slash;
 		return "|" + dots + slashes + dots + dots + slashes + dots + "|";
 	}
-
+	
 }

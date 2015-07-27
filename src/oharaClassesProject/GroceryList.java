@@ -23,5 +23,5 @@ public class GroceryList {
 		}
 		return total;
 	}
-
+	
 }

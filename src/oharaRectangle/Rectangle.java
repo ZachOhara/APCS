@@ -86,7 +86,8 @@ public class Rectangle {
 		this.y = y;
 	}
 	
-	// Returns whether the given coordinates lie inside the bounds of this rectangle
+	// Returns whether the given coordinates lie inside the bounds of this
+	// rectangle
 	public boolean contains(int x, int y) {
 		return (this.x < x && x < this.x2 && this.y2 < y && y < this.y);
 	}
@@ -95,7 +96,8 @@ public class Rectangle {
 		return contains(p.getX(), p.getY());
 	}
 	
-	// Returns the tighest possible bounding box that fully contains this rectangle and the given rectangle
+	// Returns the tighest possible bounding box that fully contains this
+	// rectangle and the given rectangle
 	public Rectangle union(Rectangle r) {
 		int unX1 = Math.min(this.x, r.x); // left bound
 		int unY1 = Math.max(this.y, r.y); // upper bound
@@ -104,7 +106,8 @@ public class Rectangle {
 		return new Rectangle(unX1, unY1, unX2 - unX1, unY1 - unY2);
 	}
 	
-	// Returns a new rectangle representing the area occupied by both this rectangle and the given rectangle 
+	// Returns a new rectangle representing the area occupied by both this
+	// rectangle and the given rectangle
 	public Rectangle intersection(Rectangle r) {
 		int unX1 = Math.max(this.x, r.x); // left bound
 		int unY1 = Math.min(this.y, r.y); // upper bound
@@ -121,10 +124,11 @@ public class Rectangle {
 	// Returns a String representation of this rectangle
 	public String toString() {
 		return "Rectangle [x=" + this.x + ", y=" + this.y + ", width="
-				+ this.width + ", height=" + this.height + "]"; 
+				+ this.width + ", height=" + this.height + "]";
 	}
 	
 	public String coordinates() {
-		return "[" + this.x + ", " + this.y + ", " + this.x2 + ", " + this.y2 + "]";
+		return "[" + this.x + ", " + this.y + ", " + this.x2 + ", " + this.y2
+				+ "]";
 	}
 }

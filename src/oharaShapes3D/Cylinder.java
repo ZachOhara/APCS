@@ -4,7 +4,7 @@ package oharaShapes3D;
  */
 
 public class Cylinder extends CircularShapeWithHeight {
-
+	
 	// Construct a cylinder with radius and height of zero
 	public Cylinder() {
 		super();
@@ -24,5 +24,5 @@ public class Cylinder extends CircularShapeWithHeight {
 	public String toString() {
 		return "Cylinder" + super.toString();
 	}
-
+	
 }

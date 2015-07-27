@@ -1,11 +1,11 @@
 package oharaChatbot;
 
 public class StudentBot extends ChatBot {
-
+	
 	public StudentBot(String nm) {
 		super(nm);
 	}
-
+	
 	@Override
 	public String respondToGreeting(String greeting) {
 		if (greeting.indexOf("morning") != -1)
@@ -14,5 +14,5 @@ public class StudentBot extends ChatBot {
 			return "Good afternoon";
 		return "Hello";
 	}
-
+	
 }

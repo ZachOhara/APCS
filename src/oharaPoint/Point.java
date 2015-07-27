@@ -11,11 +11,12 @@ public class Point extends ReddingPoint {
 	}
 	
 	public Point() {
-		this(0,0);
+		this(0, 0);
 	}
 	
 	public double distance(Point other) {
-		return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
+		return Math.sqrt(Math.pow(this.x - other.x, 2)
+				+ Math.pow(this.y - other.y, 2));
 	}
 	
 	public int manhattanDistance(Point other) {
@@ -28,15 +29,18 @@ public class Point extends ReddingPoint {
 	
 	public double slope(Point other) {
 		if (this.isVertical(other)) // yess, efficiency!
-			throw new IllegalArgumentException("Vertial line: slope is unefined");
+			throw new IllegalArgumentException(
+					"Vertial line: slope is unefined");
 		else
-			return (double)(this.y - other.y) / (this.x - other.x);
+			return (double) (this.y - other.y) / (this.x - other.x);
 	}
 	
-	// A simpler way to do this, now that there's more generic code that can be used
+	// A simpler way to do this, now that there's more generic code that can be
+	// used
 	@Override
 	public double distanceFromOrigin() {
-		return this.distance(new Point()); // put the origin in a point object and take the distance from that;
+		return this.distance(new Point()); // put the origin in a point object
+											// and take the distance from that;
 	}
 	
 	public int getX() {

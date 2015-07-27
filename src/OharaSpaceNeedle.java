@@ -1,5 +1,5 @@
 public class OharaSpaceNeedle {
-
+	
 	public static final int scale = 3;
 	
 	public static void main(String[] args) {
@@ -31,11 +31,13 @@ public class OharaSpaceNeedle {
 		for (int i = 0; i < scale - 1; i++)
 			spaces += "   ";
 		for (int i = 1; i <= scale; i++) {
-			System.out.println(spaces + "__/" + colons + "||" + colons + "\\__");
+			System.out
+					.println(spaces + "__/" + colons + "||" + colons + "\\__");
 			colons += ":::";
 			try {
 				spaces = spaces.substring(3);
-			} catch (StringIndexOutOfBoundsException expected) {}
+			} catch (StringIndexOutOfBoundsException expected) {
+			}
 			
 		}
 	}
@@ -59,23 +61,25 @@ public class OharaSpaceNeedle {
 			slashes = slashes.substring(4);
 		}
 	}
-
+	
 	public static void drawLargePole() {
 		String moduli = "";
 		String spaces = "";
-		for (int i = 0; i < Math.ceil(((double)scale)/2); i++) {
+		for (int i = 0; i < Math.ceil(((double) scale) / 2); i++) {
 			// I'm a little unclear as to what the math is for the number of
-			// moduli that appear based on scale, but this works for the two examples
+			// moduli that appear based on scale, but this works for the two
+			// examples
 			moduli += "%";
 		}
 		for (int i = 0; i < scale; i++) {
 			spaces += "   ";
 		}
-		spaces = spaces.substring(moduli.length()+1);
+		spaces = spaces.substring(moduli.length() + 1);
 		for (int i = 0; i < Math.pow(scale, 2); i++) {
-			//Still unclear on the exact math used, but I'm confident this is it
+			// Still unclear on the exact math used, but I'm confident this is
+			// it
 			System.out.println(spaces + "|" + moduli + "||" + moduli + "|");
 		}
 	}
-
+	
 }

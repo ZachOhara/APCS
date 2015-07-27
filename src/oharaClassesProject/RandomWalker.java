@@ -17,19 +17,19 @@ public class RandomWalker {
 	
 	public void move() {
 		this.steps++;
-		switch ((int)(Math.random() * 4)) {
-		case 0:
-			this.x++;
-			break;
-		case 1:
-			this.x--;
-			break;
-		case 2:
-			this.y++;
-			break;
-		case 3:
-			this.y--;
-			break;
+		switch ((int) (Math.random() * 4)) {
+			case 0:
+				this.x++;
+				break;
+			case 1:
+				this.x--;
+				break;
+			case 2:
+				this.y++;
+				break;
+			case 3:
+				this.y--;
+				break;
 		}
 	}
 	

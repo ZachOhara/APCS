@@ -5,7 +5,7 @@ public class Book {
 	private int numPages;
 	private int currentPage;
 	
-	public Book (int pages) {
+	public Book(int pages) {
 		this.numPages = pages;
 		this.currentPage = 1;
 	}
@@ -22,5 +22,5 @@ public class Book {
 		if (this.currentPage < this.numPages)
 			this.currentPage++;
 	}
-
+	
 }

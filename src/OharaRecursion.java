@@ -1,4 +1,3 @@
-
 public class OharaRecursion {
 	
 	public static int multiplyEvens(int n) {
@@ -17,23 +16,27 @@ public class OharaRecursion {
 			System.out.print("1");
 		else {
 			if (n % 2 == 1)
-				System.out.print((n*n) + ", ");
+				System.out.print((n * n) + ", ");
 			writeSquares(n - 1);
 			if (n % 2 == 0)
-				System.out.print(", " + (n*n));
+				System.out.print(", " + (n * n));
 		}
 	}
 	
 	public static void main(String[] args) {
-		int[] testCases1 = {1, 2, 3, 4};
+		int[] testCases1 = {
+				1, 2, 3, 4
+		};
 		for (int i : testCases1)
 			System.out.println(multiplyEvens(i));
 		
-		int[] testCases2 = {5, 1, 8};
+		int[] testCases2 = {
+				5, 1, 8
+		};
 		for (int i : testCases2) {
 			writeSquares(i);
 			System.out.println();
 		}
 	}
-
+	
 }

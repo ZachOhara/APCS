@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ClockSortTest {
-
+	
 	public static void main(String[] args) {
 		
 		ArrayList<ClockTime> timelist = new ArrayList<ClockTime>();
@@ -25,5 +25,5 @@ public class ClockSortTest {
 		System.out.println(timelist);
 		
 	}
-
+	
 }

@@ -25,6 +25,7 @@ public class GroceryItemOrder {
 	}
 	
 	public String toString() {
-		return "GroceryItemOrder[" + this.quantity + " of " + this.name + " at " + this.pricePerUnit + "]";
+		return "GroceryItemOrder[" + this.quantity + " of " + this.name
+				+ " at " + this.pricePerUnit + "]";
 	}
 }

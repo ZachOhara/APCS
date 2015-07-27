@@ -26,5 +26,5 @@ public class RectangularPrism extends CubicShape {
 	public String toString() {
 		return "Rectanglular Prism" + super.toString();
 	}
-
+	
 }

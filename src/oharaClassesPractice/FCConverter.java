@@ -1,7 +1,7 @@
 package oharaClassesPractice;
 
 public class FCConverter {
-
+	
 	private double degF;
 	private double degC;
 	
@@ -24,11 +24,11 @@ public class FCConverter {
 	}
 	
 	private double fToC(double f) {
-		return (5.0/9.0) * (f - 32);
+		return (5.0 / 9.0) * (f - 32);
 	}
 	
 	private double cToF(double c) {
-		return ((9.0/5.0) * c) + 32;
+		return ((9.0 / 5.0) * c) + 32;
 	}
 	
 }

@@ -3,14 +3,12 @@ package oharaClassesPractice;
 public class Circle {
 	
 	private double radius;
-
-	public Circle(double r)
-	{
+	
+	public Circle(double r) {
 		radius = r;
 	}
-
-	public double getArea()
-	{
+	
+	public double getArea() {
 		return Math.PI * radius * radius;
 	}
 	

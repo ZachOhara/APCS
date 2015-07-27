@@ -22,10 +22,11 @@ public class SquarePyramid extends CubicShape {
 		super(other);
 	}
 	
-	/* The setLength and setWidth methods are all overridden from CubicShape
-	 * so that they can be redirected to the method setSideLength. This way,
-	 * updating either base dimension individually will retain the square
-	 * nature of the base of the pyramid.
+	/*
+	 * The setLength and setWidth methods are all overridden from CubicShape so
+	 * that they can be redirected to the method setSideLength. This way,
+	 * updating either base dimension individually will retain the square nature
+	 * of the base of the pyramid.
 	 */
 	@Override
 	public void setLength(double newLength) {
@@ -47,13 +48,15 @@ public class SquarePyramid extends CubicShape {
 	// Get the surface area of the pyramid
 	@Override
 	public double getSurfaceArea() {
-		return this.getLength() * (this.getLength() + Math.sqrt(Math.pow(this.getLength(), 2)
-				+ 4 * Math.pow(this.getHeight(), 2)));
+		return this.getLength()
+				* (this.getLength() + Math.sqrt(Math.pow(this.getLength(), 2)
+						+ 4 * Math.pow(this.getHeight(), 2)));
 	}
 	
 	// Get the String representation of the pyramid
 	public String toString() {
-		return "Square Pyramid with base" + this.lengthToString() + this.heightToString();
+		return "Square Pyramid with base" + this.lengthToString()
+				+ this.heightToString();
 	}
-
+	
 }

@@ -1,8 +1,7 @@
 import java.util.Arrays;
 
-
 public class OharaArray2D {
-
+	
 	public static void main(String[] args) {
 		problem1();
 		problem2();
@@ -17,7 +16,9 @@ public class OharaArray2D {
 		int[][] matrix = new int[6][8];
 		// initialize the array
 		for (int i = 0; i < matrix.length; i++) {
-			int[] standardRow = {1,2,3,4,5,6,7,8};
+			int[] standardRow = {
+					1, 2, 3, 4, 5, 6, 7, 8
+			};
 			for (int j = 0; j < matrix[i].length; j++)
 				matrix[i][j] = standardRow[j];
 		}
@@ -26,6 +27,7 @@ public class OharaArray2D {
 		System.out.println();
 		printArray2D(matrix);
 	}
+	
 	public static void switchRows(int[][] a) {
 		for (int i = 0; i < a.length; i++)
 			a[i][4] = a[i][1];
@@ -36,7 +38,7 @@ public class OharaArray2D {
 		System.out.println("Problem 2");
 		int[][] grid = new int[4][6];
 		for (int i = 0; i < grid[1].length; i++)
-			grid[1][i] = 2 + (3*i);
+			grid[1][i] = 2 + (3 * i);
 		for (int[] a : grid) {
 			System.out.print("[");
 			for (int i : a)
@@ -48,8 +50,20 @@ public class OharaArray2D {
 	// Problem 3
 	public static void problem3() {
 		System.out.println("Problem 3");
-		int[][] a = {{1,2}, {3,4}};
-		int[][] b = {{5,6}, {7,8}};
+		int[][] a = {
+				{
+						1, 2
+				}, {
+						3, 4
+				}
+		};
+		int[][] b = {
+				{
+						5, 6
+				}, {
+						7, 8
+				}
+		};
 		printArray2DFlat(a);
 		printArray2DFlat(b);
 		System.out.println();
@@ -71,7 +85,7 @@ public class OharaArray2D {
 		double[][] exp = new double[10][4];
 		for (int i = 0; i < 10; i++)
 			for (int j = 0; j < 4; j++)
-				exp[i][j] = Math.pow(i+1, j+1);
+				exp[i][j] = Math.pow(i + 1, j + 1);
 		for (double[] a : exp) {
 			System.out.print("[");
 			for (double d : a)
@@ -83,9 +97,15 @@ public class OharaArray2D {
 	// Problem 5
 	public static void problem5() {
 		System.out.println("Problem 5");
-		String[][] board = {{"X", "O", "O"},
-				{" ", "X", " "},
-				{" ", " ", "O"}};
+		String[][] board = {
+				{
+						"X", "O", "O"
+				}, {
+						" ", "X", " "
+				}, {
+						" ", " ", "O"
+				}
+		};
 		for (int i = 0; i < 3; i++) {
 			System.out.println("-------------");
 			for (int j = 0; j < 3; j++)
@@ -110,5 +130,5 @@ public class OharaArray2D {
 		}
 		System.out.println("]");
 	}
-
+	
 }

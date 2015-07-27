@@ -5,7 +5,7 @@ package oharaShapes3D;
  * the implementation of the methods in Shape3D
  */
 public abstract class Shape implements Shape3D, Comparable<Shape> {
-
+	
 	@Override
 	public int compareTo(Shape other) {
 		return compare(this, other);
@@ -31,10 +31,11 @@ public abstract class Shape implements Shape3D, Comparable<Shape> {
 	}
 	
 	public boolean equals(Object other) {
-		if (!(other instanceof Shape))
-			throw new IllegalArgumentException("Compared object must be of type Shape");
+		if ( !(other instanceof Shape))
+			throw new IllegalArgumentException(
+					"Compared object must be of type Shape");
 		else
 			return this.compareTo((Shape) other) == 0;
 	}
-
+	
 }

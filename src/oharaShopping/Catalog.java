@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Catalog {
 	
-	/** Represents a list of Item object that could potentially be ordered
+	/**
+	 * Represents a list of Item object that could potentially be ordered
 	 */
 	
 	ArrayList<Item> localList;
@@ -13,7 +14,9 @@ public class Catalog {
 	
 	/**
 	 * Construct a new Catalog object with a name
-	 * @param name the name of the catalog
+	 * 
+	 * @param name
+	 *            the name of the catalog
 	 */
 	public Catalog(String name) {
 		this.localList = new ArrayList<Item>();
@@ -22,6 +25,7 @@ public class Catalog {
 	
 	/**
 	 * Get the name of this catalog
+	 * 
 	 * @return the catalog name
 	 */
 	public String getName() {
@@ -30,7 +34,9 @@ public class Catalog {
 	
 	/**
 	 * Add an item to the catalog
-	 * @param i The Item object to be added
+	 * 
+	 * @param i
+	 *            The Item object to be added
 	 */
 	public void add(Item i) {
 		this.localList.add(i);
@@ -38,6 +44,7 @@ public class Catalog {
 	
 	/**
 	 * Get the size of the catalog
+	 * 
 	 * @return the amount of items in the catalog
 	 */
 	public int size() {
@@ -46,7 +53,9 @@ public class Catalog {
 	
 	/**
 	 * Get an item at the specified index of the catalog
-	 * @param i The index to return
+	 * 
+	 * @param i
+	 *            The index to return
 	 * @return The Item object at index i
 	 */
 	public Item get(int i) {

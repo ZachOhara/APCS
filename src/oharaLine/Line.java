@@ -13,13 +13,15 @@ public class Line {
 		this.p2 = p2;
 	}
 	
-	// Constructs a new line from the four given integers, representing two two-dimentional points
+	// Constructs a new line from the four given integers, representing two
+	// two-dimentional points
 	public Line(int x1, int y1, int x2, int y2) {
 		this.p1 = new Point(x1, y1);
 		this.p2 = new Point(x2, y2);
 	}
 	
-	// Default constructor: constructs a line going from the origin to the origin
+	// Default constructor: constructs a line going from the origin to the
+	// origin
 	public Line() {
 		this.p1 = new Point();
 		this.p2 = new Point();

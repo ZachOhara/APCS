@@ -1,11 +1,11 @@
 package oharaChatbot;
 
 public class TeachersPet extends StudentBot {
-
+	
 	public TeachersPet(String nm) {
 		super(nm);
 	}
-
+	
 	@Override
 	public String respondToGreeting(String greeting) {
 		String response = super.respondToGreeting(greeting);
@@ -16,5 +16,5 @@ public class TeachersPet extends StudentBot {
 		response += "\nWhat are we going to do in class today?";
 		return response;
 	}
-
+	
 }

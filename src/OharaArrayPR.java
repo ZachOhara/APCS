@@ -18,43 +18,62 @@ import java.util.*;
  */
 
 public class OharaArrayPR {
+	
 	public static void main(String[] args) {
-		// 1. Write a method swap that accepts an array of integers 
+		// 1. Write a method swap that accepts an array of integers
 		// and two indexes and swaps the elements at those indexes.
-		int[] a1 = {12, 34, 56};
+		int[] a1 = {
+				12, 34, 56
+		};
 		swap(a1, 1, 2);
-		System.out.println(Arrays.toString(a1));  // [12, 56, 34]
-
-		// 2.	Write a method swapAll that accepts two arrays of integers 
+		System.out.println(Arrays.toString(a1)); // [12, 56, 34]
+		
+		// 2. Write a method swapAll that accepts two arrays of integers
 		// as parameters and swaps their entire contents.
 		// Assume that the two arrays are the same length.
-		int[] a1b = {12, 34, 56};
-		int[] a2b = {20, 50, 80};
+		int[] a1b = {
+				12, 34, 56
+		};
+		int[] a2b = {
+				20, 50, 80
+		};
 		swapAll(a1b, a2b);
-		System.out.println(Arrays.toString(a1b));  // [20, 50, 80]
-		System.out.println(Arrays.toString(a2b));  // [12, 34, 56]
-
-		// 3.	Write a method merge that accepts two arrays of integers 
-		// and returns a new array containing all elements of the first array 
+		System.out.println(Arrays.toString(a1b)); // [20, 50, 80]
+		System.out.println(Arrays.toString(a2b)); // [12, 34, 56]
+		
+		// 3. Write a method merge that accepts two arrays of integers
+		// and returns a new array containing all elements of the first array
 		// followed by all elements of the second.
-		int[] a1c = {12, 34, 56};
-		int[] a2c = {7, 8, 9, 10};
+		int[] a1c = {
+				12, 34, 56
+		};
+		int[] a2c = {
+				7, 8, 9, 10
+		};
 		int[] a3c = merge(a1c, a2c);
 		System.out.println(Arrays.toString(a3c)); // [12, 34, 56, 7, 8, 9, 10]
-
-		// 4.	Write a method merge3 that merges 3 arrays similarly to problem 3.
-		int[] a1d = {12, 34, 56};
-		int[] a2d = {7, 8, 9, 10};
-		int[] a3d = {444, 222, -1};
+		
+		// 4. Write a method merge3 that merges 3 arrays similarly to problem 3.
+		int[] a1d = {
+				12, 34, 56
+		};
+		int[] a2d = {
+				7, 8, 9, 10
+		};
+		int[] a3d = {
+				444, 222, -1
+		};
 		int[] a4d = merge3(a1d, a2d, a3d);
 		System.out.println(Arrays.toString(a4d));
 		// [12, 34, 56, 7, 8, 9, 10, 444, 222, -1]
-
+		
 		// 5. Determines the percent of even numbers in an array of integers.
-		int[] numbers = {6, 2, 9, 11, 3};
+		int[] numbers = {
+				6, 2, 9, 11, 3
+		};
 		double percent = percentEven(numbers);
-		System.out.println("The percent of even numbers in " 
-		   + Arrays.toString(numbers) + " is " + percent + ".");
+		System.out.println("The percent of even numbers in "
+				+ Arrays.toString(numbers) + " is " + percent + ".");
 	}
 	
 	public static void swap(int[] a, int in1, int in2) {
@@ -84,7 +103,7 @@ public class OharaArrayPR {
 		return result;
 	}
 	
-	public static int[] merge3(int[]a, int[] b, int[] c) {
+	public static int[] merge3(int[] a, int[] b, int[] c) {
 		return merge(merge(a, b), c);
 		// You never said I couldn't do this
 	}
@@ -94,7 +113,7 @@ public class OharaArrayPR {
 		for (int i : a)
 			if (i % 2 == 0)
 				evens++;
-		return (double)evens / a.length;
+		return (double) evens / a.length;
 	}
-
+	
 }

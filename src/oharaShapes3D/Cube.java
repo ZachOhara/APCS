@@ -20,10 +20,11 @@ public class Cube extends CubicShape {
 		super(other);
 	}
 	
-	/* The setLength, setWidth, and setHeight methods are all overridden from CubicShape
-	 * so that they can be redirected to the method setAllDimensions. This way,
-	 * updating any dimension individually will retain the cubic nature of the
-	 * shape.
+	/*
+	 * The setLength, setWidth, and setHeight methods are all overridden from
+	 * CubicShape so that they can be redirected to the method setAllDimensions.
+	 * This way, updating any dimension individually will retain the cubic
+	 * nature of the shape.
 	 */
 	@Override
 	public void setLength(double newLength) {
@@ -44,7 +45,8 @@ public class Cube extends CubicShape {
 	@Override
 	public String toString() {
 		return "Cube with length, width" + this.heightToString();
-		// this.heightToString() will evaluate to " and height of " + this.getHeight()
+		// this.heightToString() will evaluate to " and height of " +
+		// this.getHeight()
 	}
-
+	
 }

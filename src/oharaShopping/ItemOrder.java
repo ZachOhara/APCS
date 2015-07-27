@@ -11,8 +11,11 @@ public class ItemOrder {
 	
 	/**
 	 * Construct a new ItemOrder object with an item and a quantity
-	 * @param item The Item to buy
-	 * @param quantity The amount of the specified item
+	 * 
+	 * @param item
+	 *            The Item to buy
+	 * @param quantity
+	 *            The amount of the specified item
 	 */
 	public ItemOrder(Item item, int quantity) {
 		this.item = item;
@@ -21,6 +24,7 @@ public class ItemOrder {
 	
 	/**
 	 * Get the price of the item for the set quantity
+	 * 
 	 * @return The cost of the item order
 	 */
 	public double getPrice() {
@@ -29,6 +33,7 @@ public class ItemOrder {
 	
 	/**
 	 * Get the item that is being bought
+	 * 
 	 * @return The item that is being bought
 	 */
 	public Item getItem() {
@@ -37,6 +42,6 @@ public class ItemOrder {
 	
 	public String toString() {
 		return this.item.toString() + " " + this.quantity;
-	}	
-
+	}
+	
 }

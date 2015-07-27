@@ -13,7 +13,8 @@ public abstract class Poem {
 		if (this instanceof Haiku)
 			System.out.println("A haiku is 3 lines of 5, 7, 5 syllables");
 		else if (this instanceof Limerick)
-			System.out.println("A limerick is 5 lines of 9, 9, 6, 6, 9 syllables");
+			System.out
+					.println("A limerick is 5 lines of 9, 9, 6, 6, 9 syllables");
 	}
 	
 }

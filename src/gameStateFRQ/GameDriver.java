@@ -2,19 +2,17 @@ package gameStateFRQ;
 
 public class GameDriver {
 	
-	private GameState state;  // the current state of the game
-
-	public GameDriver(GameState initial)
-	{
+	private GameState state; // the current state of the game
+	
+	public GameDriver(GameState initial) {
 		state = initial;
 	}
 	
-	public void play()
-	{
+	public void play() {
 		System.out.println(state);
 		Player currentPlayer;
 		String move;
-		while (!state.isGameOver()) {
+		while ( !state.isGameOver()) {
 			currentPlayer = state.getCurrentPlayer();
 			move = currentPlayer.getNextMove(state);
 			System.out.println("Player: " + currentPlayer.getName());
@@ -27,5 +25,5 @@ public class GameDriver {
 		else
 			System.out.println("Game ends in a draw");
 	}
-
+	
 }
