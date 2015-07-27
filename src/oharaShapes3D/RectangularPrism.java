@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 /* A RectangularPrism object represents a shape in 3D space that is composed
  * of a unique length, width, and height.

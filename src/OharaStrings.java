@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaStrings {
+public class OharaStrings {
 
 	public static void main(String[] args) {
 		// printStrings and vertical methods

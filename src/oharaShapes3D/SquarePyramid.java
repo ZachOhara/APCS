@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 /* A SquarePyramid object represents a Shape in 3D space with a square base, and
  * four iscoseles triangles extending from the sides of the base and coming to a

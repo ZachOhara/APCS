@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaChatbot.magpie4;
+package oharaChatbot.magpie4;
 
 /**
  * A program to carry on conversations with a human user. This version:

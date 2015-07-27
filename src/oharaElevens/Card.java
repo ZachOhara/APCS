@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaElevens;
+package oharaElevens;
 
 /**
  * Card.java <code>Card</code> represents a playing card.

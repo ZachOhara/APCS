@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaChatbot.magpie3;
+package oharaChatbot.magpie3;
 
 public class Magpie3 {
 

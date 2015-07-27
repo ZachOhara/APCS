@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 // An abstract superclass for shapes with a circular cross-section
 // that extends over some height

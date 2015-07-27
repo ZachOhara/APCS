@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaSongOrig {
+public class OharaSongOrig {
 
 	static String[] objects = {"maiden all forlorn,", "cow with the crumpled horn,", "dog,", "cat,", "rat,",
 		"malt,", "house that Jack built."};

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShopping;
+package oharaShopping;
 
 /* ShoppingMain provides method main for a simple shopping program.
  */

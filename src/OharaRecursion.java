@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaRecursion {
+public class OharaRecursion {
 
 	public static int multiplyEvens(int n) {
 		if (n <= 0) {

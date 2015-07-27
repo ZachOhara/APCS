@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaMidpoint {
+public class OharaMidpoint {
 
 	public static void main(String[] args) {
 		if (OharaMidpoint.hasMidpoint(7, 4, 10)) {

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 /* The CubicShape class is an abstract class that contains fields and methods
  * that are used for all shapes that are defined in terms of length, width,

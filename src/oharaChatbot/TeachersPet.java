@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaChatbot;
+package oharaChatbot;
 
 public class TeachersPet extends StudentBot {
 

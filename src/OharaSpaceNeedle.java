@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaSpaceNeedle {
+public class OharaSpaceNeedle {
 
 	public static final int scale = 3;
 

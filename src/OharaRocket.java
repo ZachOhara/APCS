@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaRocket {
+public class OharaRocket {
 
 	public static int scale = 3;
 

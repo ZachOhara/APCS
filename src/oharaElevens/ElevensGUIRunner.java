@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaElevens;
+package oharaElevens;
 
 /**
  * This is a class that plays the GUI version of the Elevens game. See accompanying

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 /* The Shape3D interface contains methods that should be defined for most 3D shapes
  */

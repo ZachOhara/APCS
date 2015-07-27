@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaMergeSort;
+package oharaMergeSort;
 
 // Program to sort an input file of names, ignoring case, using the mergesort
 // algorithm.

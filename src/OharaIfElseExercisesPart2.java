@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- public class OharaIfElseExercisesPart2 {
+public class OharaIfElseExercisesPart2 {
 
 	public static void main(String[] args) {
 		System.out.println(OharaIfElseExercisesPart2.swapPairs("badcfehgkimlon"));

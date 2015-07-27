@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaFloorPlan.frq;
+package oharaFloorPlan.frq;
 
 // Exam 3 Question 4
 

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaClassesProject;
+package oharaClassesProject;
 
 import java.awt.Color;
 import java.awt.Graphics;

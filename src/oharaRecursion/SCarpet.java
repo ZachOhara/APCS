@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaRecursion;
+package oharaRecursion;
 
 // Draws the Sierpinski Carpet fractal image.
 import java.awt.Graphics;

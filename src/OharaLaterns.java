@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- /* Output from problem 1:
+/* Output from problem 1:
  * I am method 1.
  * I am method 2.
  * I am method 3.

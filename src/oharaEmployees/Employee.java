@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaEmployees;
+package oharaEmployees;
 
 // A class to represent employees in general (20-page manual).
 public class Employee {

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaElevens;
+package oharaElevens;
 
 /**
  * This class provides a convenient way to test shuffling methods.

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaShapes3D;
+package oharaShapes3D;
 
 /* The shape class is a generic class that all other shapes are indirectly derived
  * from. It only contains methods implemented from Comparable<>, and it passes on

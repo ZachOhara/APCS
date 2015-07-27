@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaRecursion;
+package oharaRecursion;
 
 // This program draws the Koch snowflake fractal.
 

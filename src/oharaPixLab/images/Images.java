@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaPixLab.images;
+package oharaPixLab.images;
 
 import oharaPixLab.classes.Picture;
 

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaPoems;
+package oharaPoems;
 
 public class Limerick extends Poem {
 

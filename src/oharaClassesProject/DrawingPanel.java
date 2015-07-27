@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaClassesProject;
+package oharaClassesProject;
 
 //This provided class helps make it easier to draw the assignment's graphics.
 //A DrawingPanel object is a drawing surface for painting 2D graphics.

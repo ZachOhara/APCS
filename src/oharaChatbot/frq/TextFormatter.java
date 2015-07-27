@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaChatbot.frq;
+package oharaChatbot.frq;
 
 public class TextFormatter {
 

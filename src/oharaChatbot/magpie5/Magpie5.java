@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package oharaChatbot.magpie5;
+package oharaChatbot.magpie5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
