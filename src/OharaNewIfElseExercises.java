@@ -1,29 +1,28 @@
 import java.util.Scanner;
 
 public class OharaNewIfElseExercises {
-	
+
 	static Scanner input = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
-		printRange(20, 10);
-		smallestLargest(new Scanner(System.in));
-		evenSumMax(new Scanner(System.in));
+		OharaNewIfElseExercises.printRange(20, 10);
+		OharaNewIfElseExercises.smallestLargest(new Scanner(System.in));
+		OharaNewIfElseExercises.evenSumMax(new Scanner(System.in));
 	}
-	
+
 	public static void printRange(int a, int b) {
 		int increment = a < b ? 1 : -1;
 		/*
-		 * Would be done with if-statements: int increment = 1; if (b > a)
-		 * increment = -1;
+		 * Would be done with if-statements: int increment = 1; if (b > a) increment = -1;
 		 */
 		System.out.print("[");
 		for (int i = a; i != b; i += increment) {
 			System.out.print(i + ", ");
 		}
 		System.out.println(b + "]"); // discluded from for loop because print
-										// formatting. Easier this way.
+		// formatting. Easier this way.
 	}
-	
+
 	public static void smallestLargest(Scanner input) {
 		System.out.print("How many numbers do you want to enter? ");
 		int n = input.nextInt();
@@ -39,7 +38,7 @@ public class OharaNewIfElseExercises {
 		System.out.println("Smallest: " + min);
 		System.out.println("Largest: " + max);
 	}
-	
+
 	public static void evenSumMax(Scanner input) {
 		System.out.print("How many integers? ");
 		int n = input.nextInt();
@@ -56,5 +55,5 @@ public class OharaNewIfElseExercises {
 		}
 		System.out.println("Even sum = " + sum + ", even max = " + max);
 	}
-	
+
 }

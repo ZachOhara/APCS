@@ -3,7 +3,7 @@ package oharaShopping;
 /* ShoppingMain provides method main for a simple shopping program.
  */
 public class ShoppingMain {
-	
+
 	public static void main(String[] args) {
 		Catalog list = new Catalog("CS Gift Catalog");
 		list.add(new Item("silly putty", 3.95, 10, 19.99));
@@ -18,7 +18,7 @@ public class ShoppingMain {
 		list.add(new Item("'Java Rules!' button", 0.99, 10, 5.0));
 		list.add(new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95));
 		System.out.println(list);
-		
+
 		ShoppingFrame f = new ShoppingFrame(list);
 		f.setVisible(true);
 	}

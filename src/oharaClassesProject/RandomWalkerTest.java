@@ -1,10 +1,10 @@
 package oharaClassesProject;
 
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
 
 public class RandomWalkerTest {
-	
+
 	public static void main(String[] args) {
 		DrawingPanel p = new DrawingPanel(1000, 800);
 		p.setBackground(Color.BLACK);

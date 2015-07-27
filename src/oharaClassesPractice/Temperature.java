@@ -13,74 +13,78 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class Temperature extends JFrame implements ActionListener {
-	
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField displayF, displayC;
-	
+
 	// Constructor
 	public Temperature() {
-		Container c = getContentPane();
+		Container c = this.getContentPane();
 		c.setLayout(new GridLayout(2, 2, 10, 0));
-		
+
 		c.add(new JLabel("  Fahrenheit:"));
 		c.add(new JLabel("  Celsius:"));
-		
-		displayF = new JTextField(6);
-		displayF.setBackground(Color.YELLOW);
-		displayF.addActionListener(this);
-		c.add(displayF);
-		
-		displayC = new JTextField(6);
-		displayC.setBackground(Color.YELLOW);
-		displayC.addActionListener(this);
-		c.add(displayC);
+
+		this.displayF = new JTextField(6);
+		this.displayF.setBackground(Color.YELLOW);
+		this.displayF.addActionListener(this);
+		c.add(this.displayF);
+
+		this.displayC = new JTextField(6);
+		this.displayC.setBackground(Color.YELLOW);
+		this.displayC.addActionListener(this);
+		c.add(this.displayC);
 	}
-	
+
 	// Invoked when <Enter> is pressed
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		FCConverter fc = new FCConverter();
-		
-		if ((JTextField) e.getSource() == displayF) {
+
+		if ((JTextField) e.getSource() == this.displayF) {
 			// Fahrenheit to Celsius
-			double degrees = stringToDouble(displayF.getText());
+			double degrees = this.stringToDouble(this.displayF.getText());
 			if ( !Double.isNaN(degrees)) {
 				fc.setFahrenheit(degrees);
 				degrees = fc.getCelsius();
-				displayC.setText(String.format("%1.1f", degrees));
+				this.displayC.setText(String.format("%1.1f", degrees));
 			} else {
-				displayF.selectAll();
+				this.displayF.selectAll();
 			}
 		} else {
 			// Celsius to Fahrenheit
-			double degrees = stringToDouble(displayC.getText());
+			double degrees = this.stringToDouble(this.displayC.getText());
 			if ( !Double.isNaN(degrees)) {
 				fc.setCelsius(degrees);
 				degrees = fc.getFahrenheit();
-				displayF.setText(String.format("%1.1f", degrees));
+				this.displayF.setText(String.format("%1.1f", degrees));
 			} else {
-				displayC.selectAll();
+				this.displayC.selectAll();
 			}
 		}
 	}
-	
+
 	// Extracts a double value from a string
 	private double stringToDouble(String s) {
 		double degrees;
 		try {
 			degrees = Double.parseDouble(s);
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(null, "Invalid Input", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Invalid Input", "Error", JOptionPane.ERROR_MESSAGE);
 			degrees = Double.NaN;
 		}
 		return degrees;
 	}
-	
+
 	// **********************************************************************
-	
+
 	public static void main(String[] args) {
 		Temperature window = new Temperature();
 		window.setBounds(300, 300, 200, 80);
-		window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}
 }

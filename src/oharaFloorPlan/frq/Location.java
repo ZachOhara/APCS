@@ -3,34 +3,35 @@ package oharaFloorPlan.frq;
 // Exam 3 Question 4
 
 public class Location {
-	
+
 	private int row, col;
 	private int direction;
-	
+
 	public Location(int r, int c) {
-		row = r;
-		col = c;
+		this.row = r;
+		this.col = c;
 	}
-	
+
 	public Location(int r, int c, int dir) {
-		row = r;
-		col = c;
-		direction = dir;
+		this.row = r;
+		this.col = c;
+		this.direction = dir;
 	}
-	
+
 	public int getRow() {
-		return row;
+		return this.row;
 	}
-	
+
 	public int getCol() {
-		return col;
+		return this.col;
 	}
-	
+
 	public int getDirection() {
-		return direction;
+		return this.direction;
 	}
-	
+
+	@Override
 	public String toString() {
-		return "(" + row + ", " + col + " | " + direction + ")";
+		return "(" + this.row + ", " + this.col + " | " + this.direction + ")";
 	}
 }

@@ -3,7 +3,7 @@ package oharaClassesPractice;
 import java.util.Scanner;
 
 public class CircleTest {
-	
+
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		System.out.print("Enter the radius: ");
@@ -13,5 +13,5 @@ public class CircleTest {
 		System.out.println("radius = " + r + " area = " + area);
 		kb.close();
 	}
-	
+
 }

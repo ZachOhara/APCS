@@ -15,537 +15,528 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * A class that represents a simple picture. A simple picture may have an
- * associated file name and a title. A simple picture has pixels, width, and
- * height. A simple picture uses a BufferedImage to hold the pixels. You can
- * show a simple picture in a PictureFrame (a JFrame). You can also explore a
- * simple picture.
- * 
+ * A class that represents a simple picture. A simple picture may have an associated file
+ * name and a title. A simple picture has pixels, width, and height. A simple picture uses
+ * a BufferedImage to hold the pixels. You can show a simple picture in a PictureFrame (a
+ * JFrame). You can also explore a simple picture.
+ *
  * @author Barb Ericson ericson@cc.gatech.edu
  */
 public class SimplePicture implements DigitalPicture {
-	
+
 	// ///////////////////// Fields /////////////////////////
-	
+
 	/**
 	 * the file name associated with the simple picture
 	 */
 	private String fileName;
-	
+
 	/**
 	 * the title of the simple picture
 	 */
 	private String title;
-	
+
 	/**
 	 * buffered image to hold pixels for the simple picture
 	 */
 	private BufferedImage bufferedImage;
-	
+
 	/**
 	 * frame used to display the simple picture
 	 */
 	private PictureFrame pictureFrame;
-	
+
 	/**
 	 * extension for this file (jpg or bmp)
 	 */
 	private String extension;
-	
+
 	// ///////////////////// Constructors /////////////////////////
-	
+
 	/**
-	 * A Constructor that takes no arguments. It creates a picture with a width
-	 * of 200 and a height of 100 that is all white. A no-argument constructor
-	 * must be given in order for a class to be able to be subclassed. By
-	 * default all subclasses will implicitly call this in their parent's no
-	 * argument constructor unless a different call to super() is explicitly
-	 * made as the first line of code in a constructor.
+	 * A Constructor that takes no arguments. It creates a picture with a width of 200 and
+	 * a height of 100 that is all white. A no-argument constructor must be given in order
+	 * for a class to be able to be subclassed. By default all subclasses will implicitly
+	 * call this in their parent's no argument constructor unless a different call to
+	 * super() is explicitly made as the first line of code in a constructor.
 	 */
 	public SimplePicture() {
 		this(200, 100);
 	}
-	
+
 	/**
-	 * A Constructor that takes a file name and uses the file to create a
-	 * picture
-	 * 
-	 * @param fileName
-	 *            the file name to use in creating the picture
+	 * A Constructor that takes a file name and uses the file to create a picture
+	 *
+	 * @param fileName the file name to use in creating the picture
 	 */
 	public SimplePicture(String fileName) {
-		
+
 		// load the picture into the buffered image
-		load(fileName);
-		
+		this.load(fileName);
+
 	}
-	
+
 	/**
-	 * A constructor that takes the width and height desired for a picture and
-	 * creates a buffered image of that size. This constructor doesn't show the
-	 * picture. The pixels will all be white.
-	 * 
-	 * @param width
-	 *            the desired width
-	 * @param height
-	 *            the desired height
+	 * A constructor that takes the width and height desired for a picture and creates a
+	 * buffered image of that size. This constructor doesn't show the picture. The pixels
+	 * will all be white.
+	 *
+	 * @param width the desired width
+	 * @param height the desired height
 	 */
 	public SimplePicture(int width, int height) {
-		bufferedImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
-		title = "None";
-		fileName = "None";
-		extension = "jpg";
-		setAllPixelsToAColor(Color.white);
+		this.bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		this.title = "None";
+		this.fileName = "None";
+		this.extension = "jpg";
+		this.setAllPixelsToAColor(Color.white);
 	}
-	
+
 	/**
-	 * A constructor that takes the width and height desired for a picture and
-	 * creates a buffered image of that size. It also takes the color to use for
-	 * the background of the picture.
-	 * 
-	 * @param width
-	 *            the desired width
-	 * @param height
-	 *            the desired height
-	 * @param theColor
-	 *            the background color for the picture
+	 * A constructor that takes the width and height desired for a picture and creates a
+	 * buffered image of that size. It also takes the color to use for the background of
+	 * the picture.
+	 *
+	 * @param width the desired width
+	 * @param height the desired height
+	 * @param theColor the background color for the picture
 	 */
 	public SimplePicture(int width, int height, Color theColor) {
 		this(width, height);
-		setAllPixelsToAColor(theColor);
+		this.setAllPixelsToAColor(theColor);
 	}
-	
+
 	/**
 	 * A Constructor that takes a picture to copy information from
-	 * 
-	 * @param copyPicture
-	 *            the picture to copy from
+	 *
+	 * @param copyPicture the picture to copy from
 	 */
 	public SimplePicture(SimplePicture copyPicture) {
 		if (copyPicture.fileName != null) {
 			this.fileName = new String(copyPicture.fileName);
 			this.extension = copyPicture.extension;
 		}
-		if (copyPicture.title != null)
+		if (copyPicture.title != null) {
 			this.title = new String(copyPicture.title);
+		}
 		if (copyPicture.bufferedImage != null) {
-			this.bufferedImage = new BufferedImage(copyPicture.getWidth(),
-					copyPicture.getHeight(), BufferedImage.TYPE_INT_RGB);
+			this.bufferedImage =
+					new BufferedImage(copyPicture.getWidth(), copyPicture.getHeight(),
+							BufferedImage.TYPE_INT_RGB);
 			this.copyPicture(copyPicture);
 		}
 	}
-	
+
 	/**
 	 * A constructor that takes a buffered image
-	 * 
-	 * @param image
-	 *            the buffered image
+	 *
+	 * @param image the buffered image
 	 */
 	public SimplePicture(BufferedImage image) {
 		this.bufferedImage = image;
-		title = "None";
-		fileName = "None";
-		extension = "jpg";
+		this.title = "None";
+		this.fileName = "None";
+		this.extension = "jpg";
 	}
-	
+
 	// //////////////////////// Methods //////////////////////////////////
-	
+
 	/**
 	 * Method to get the extension for this picture
-	 * 
+	 *
 	 * @return the extendsion (jpg, bmp, giff, etc)
 	 */
 	public String getExtension() {
-		return extension;
+		return this.extension;
 	}
-	
+
 	/**
-	 * Method that will copy all of the passed source picture into the current
-	 * picture object
-	 * 
-	 * @param sourcePicture
-	 *            the picture object to copy
+	 * Method that will copy all of the passed source picture into the current picture
+	 * object
+	 *
+	 * @param sourcePicture the picture object to copy
 	 */
 	public void copyPicture(SimplePicture sourcePicture) {
 		Pixel sourcePixel = null;
 		Pixel targetPixel = null;
-		
+
 		// loop through the columns
-		for (int sourceX = 0, targetX = 0; sourceX < sourcePicture.getWidth()
-				&& targetX < this.getWidth(); sourceX++, targetX++) {
+		for (int sourceX = 0, targetX = 0; sourceX < sourcePicture.getWidth() && targetX < this.getWidth(); sourceX++, targetX++) {
 			// loop through the rows
-			for (int sourceY = 0, targetY = 0; sourceY < sourcePicture
-					.getHeight() && targetY < this.getHeight(); sourceY++, targetY++) {
+			for (int sourceY = 0, targetY = 0; sourceY < sourcePicture.getHeight()
+					&& targetY < this.getHeight(); sourceY++, targetY++) {
 				sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
 				targetPixel = this.getPixel(targetX, targetY);
 				targetPixel.setColor(sourcePixel.getColor());
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * Method to set the color in the picture to the passed color
-	 * 
-	 * @param color
-	 *            the color to set to
+	 *
+	 * @param color the color to set to
 	 */
 	public void setAllPixelsToAColor(Color color) {
 		// loop through all x
 		for (int x = 0; x < this.getWidth(); x++) {
 			// loop through all y
 			for (int y = 0; y < this.getHeight(); y++) {
-				getPixel(x, y).setColor(color);
+				this.getPixel(x, y).setColor(color);
 			}
 		}
 	}
-	
+
 	/**
 	 * Method to get the buffered image
-	 * 
+	 *
 	 * @return the buffered image
 	 */
+	@Override
 	public BufferedImage getBufferedImage() {
-		return bufferedImage;
+		return this.bufferedImage;
 	}
-	
+
 	/**
 	 * Method to get a graphics object for this picture to use to draw on
-	 * 
+	 *
 	 * @return a graphics object to use for drawing
 	 */
 	public Graphics getGraphics() {
-		return bufferedImage.getGraphics();
+		return this.bufferedImage.getGraphics();
 	}
-	
+
 	/**
-	 * Method to get a Graphics2D object for this picture which can be used to
-	 * do 2D drawing on the picture
+	 * Method to get a Graphics2D object for this picture which can be used to do 2D
+	 * drawing on the picture
 	 */
 	public Graphics2D createGraphics() {
-		return bufferedImage.createGraphics();
+		return this.bufferedImage.createGraphics();
 	}
-	
+
 	/**
 	 * Method to get the file name associated with the picture
-	 * 
+	 *
 	 * @return the file name associated with the picture
 	 */
+	@Override
 	public String getFileName() {
-		return fileName;
+		return this.fileName;
 	}
-	
+
 	/**
 	 * Method to set the file name
-	 * 
-	 * @param name
-	 *            the full pathname of the file
+	 *
+	 * @param name the full pathname of the file
 	 */
 	public void setFileName(String name) {
-		fileName = name;
+		this.fileName = name;
 	}
-	
+
 	/**
 	 * Method to get the title of the picture
-	 * 
+	 *
 	 * @return the title of the picture
 	 */
+	@Override
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	
+
 	/**
 	 * Method to set the title for the picture
-	 * 
-	 * @param title
-	 *            the title to use for the picture
+	 *
+	 * @param title the title to use for the picture
 	 */
+	@Override
 	public void setTitle(String title) {
 		this.title = title;
-		if (pictureFrame != null)
-			pictureFrame.setTitle(title);
+		if (this.pictureFrame != null) {
+			this.pictureFrame.setTitle(title);
+		}
 	}
-	
+
 	/**
 	 * Method to get the width of the picture in pixels
-	 * 
+	 *
 	 * @return the width of the picture in pixels
 	 */
+	@Override
 	public int getWidth() {
-		return bufferedImage.getWidth();
+		return this.bufferedImage.getWidth();
 	}
-	
+
 	/**
 	 * Method to get the height of the picture in pixels
-	 * 
+	 *
 	 * @return the height of the picture in pixels
 	 */
+	@Override
 	public int getHeight() {
-		return bufferedImage.getHeight();
+		return this.bufferedImage.getHeight();
 	}
-	
+
 	/**
 	 * Method to get the picture frame for the picture
-	 * 
+	 *
 	 * @return the picture frame associated with this picture (it may be null)
 	 */
 	public PictureFrame getPictureFrame() {
-		return pictureFrame;
+		return this.pictureFrame;
 	}
-	
+
 	/**
 	 * Method to set the picture frame for this picture
-	 * 
-	 * @param pictureFrame
-	 *            the picture frame to use
+	 *
+	 * @param pictureFrame the picture frame to use
 	 */
 	public void setPictureFrame(PictureFrame pictureFrame) {
 		// set this picture objects' picture frame to the passed one
 		this.pictureFrame = pictureFrame;
 	}
-	
+
 	/**
 	 * Method to get an image from the picture
-	 * 
+	 *
 	 * @return the buffered image since it is an image
 	 */
+	@Override
 	public Image getImage() {
-		return bufferedImage;
+		return this.bufferedImage;
 	}
-	
+
 	/**
 	 * Method to return the pixel value as an int for the given x and y location
-	 * 
-	 * @param x
-	 *            the x coordinate of the pixel
-	 * @param y
-	 *            the y coordinate of the pixel
+	 *
+	 * @param x the x coordinate of the pixel
+	 * @param y the y coordinate of the pixel
 	 * @return the pixel value as an integer (alpha, red, green, blue)
 	 */
+	@Override
 	public int getBasicPixel(int x, int y) {
-		return bufferedImage.getRGB(x, y);
+		return this.bufferedImage.getRGB(x, y);
 	}
-	
+
 	/**
 	 * Method to set the value of a pixel in the picture from an int
-	 * 
-	 * @param x
-	 *            the x coordinate of the pixel
-	 * @param y
-	 *            the y coordinate of the pixel
-	 * @param rgb
-	 *            the new rgb value of the pixel (alpha, red, green, blue)
+	 *
+	 * @param x the x coordinate of the pixel
+	 * @param y the y coordinate of the pixel
+	 * @param rgb the new rgb value of the pixel (alpha, red, green, blue)
 	 */
+	@Override
 	public void setBasicPixel(int x, int y, int rgb) {
-		bufferedImage.setRGB(x, y, rgb);
+		this.bufferedImage.setRGB(x, y, rgb);
 	}
-	
+
 	/**
 	 * Method to get a pixel object for the given x and y location
-	 * 
-	 * @param x
-	 *            the x location of the pixel in the picture
-	 * @param y
-	 *            the y location of the pixel in the picture
+	 *
+	 * @param x the x location of the pixel in the picture
+	 * @param y the y location of the pixel in the picture
 	 * @return a Pixel object for this location
 	 */
+	@Override
 	public Pixel getPixel(int x, int y) {
 		// create the pixel object for this picture and the given x and y
 		// location
 		Pixel pixel = new Pixel(this, x, y);
 		return pixel;
 	}
-	
+
 	/**
 	 * Method to get a one-dimensional array of Pixels for this simple picture
-	 * 
-	 * @return a one-dimensional array of Pixel objects starting with y=0 to
-	 *         y=height-1 and x=0 to x=width-1.
+	 *
+	 * @return a one-dimensional array of Pixel objects starting with y=0 to y=height-1 and
+	 * x=0 to x=width-1.
 	 */
+	@Override
 	public Pixel[] getPixels() {
-		int width = getWidth();
-		int height = getHeight();
+		int width = this.getWidth();
+		int height = this.getHeight();
 		Pixel[] pixelArray = new Pixel[width * height];
-		
+
 		// loop through height rows from top to bottom
-		for (int row = 0; row < height; row++)
-			for (int col = 0; col < width; col++)
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
 				pixelArray[row * width + col] = new Pixel(this, col, row);
-		
+			}
+		}
+
 		return pixelArray;
 	}
-	
+
 	/**
 	 * Method to get a two-dimensional array of Pixels for this simple picture
-	 * 
+	 *
 	 * @return a two-dimensional array of Pixel objects in row-major order.
 	 */
+	@Override
 	public Pixel[][] getPixels2D() {
-		int width = getWidth();
-		int height = getHeight();
+		int width = this.getWidth();
+		int height = this.getHeight();
 		Pixel[][] pixelArray = new Pixel[height][width];
-		
+
 		// loop through height rows from top to bottom
-		for (int row = 0; row < height; row++)
-			for (int col = 0; col < width; col++)
+		for (int row = 0; row < height; row++) {
+			for (int col = 0; col < width; col++) {
 				pixelArray[row][col] = new Pixel(this, col, row);
-		
+			}
+		}
+
 		return pixelArray;
 	}
-	
+
 	/**
 	 * Method to load the buffered image with the passed image
-	 * 
-	 * @param image
-	 *            the image to use
+	 *
+	 * @param image the image to use
 	 */
+	@Override
 	public void load(Image image) {
 		// get a graphics context to use to draw on the buffered image
-		Graphics2D graphics2d = bufferedImage.createGraphics();
-		
+		Graphics2D graphics2d = this.bufferedImage.createGraphics();
+
 		// draw the image on the buffered image starting at 0,0
 		graphics2d.drawImage(image, 0, 0, null);
-		
+
 		// show the new image
-		show();
+		this.show();
 	}
-	
+
 	/**
 	 * Method to show the picture in a picture frame
 	 */
+	@Override
 	public void show() {
 		// if there is a current picture frame then use it
-		if (pictureFrame != null)
-			pictureFrame.updateImageAndShowIt();
-		
-		// else create a new picture frame with this picture
-		else
-			pictureFrame = new PictureFrame(this);
+		if (this.pictureFrame != null) {
+			this.pictureFrame.updateImageAndShowIt();
+		} else {
+			this.pictureFrame = new PictureFrame(this);
+		}
 	}
-	
+
 	/**
 	 * Method to hide the picture display
 	 */
 	public void hide() {
-		if (pictureFrame != null)
-			pictureFrame.setVisible(false);
+		if (this.pictureFrame != null) {
+			this.pictureFrame.setVisible(false);
+		}
 	}
-	
+
 	/**
 	 * Method to make this picture visible or not
-	 * 
-	 * @param flag
-	 *            true if you want it visible else false
+	 *
+	 * @param flag true if you want it visible else false
 	 */
 	public void setVisible(boolean flag) {
-		if (flag)
+		if (flag) {
 			this.show();
-		else
+		} else {
 			this.hide();
+		}
 	}
-	
+
 	/**
-	 * Method to open a picture explorer on a copy (in memory) of this simple
-	 * picture
+	 * Method to open a picture explorer on a copy (in memory) of this simple picture
 	 */
+	@Override
 	public void explore() {
 		// create a copy of the current picture and explore it
 		new PictureExplorer(new SimplePicture(this));
 	}
-	
+
 	/**
-	 * Method to force the picture to repaint itself. This is very useful after
-	 * you have changed the pixels in a picture and you want to see the change.
+	 * Method to force the picture to repaint itself. This is very useful after you have
+	 * changed the pixels in a picture and you want to see the change.
 	 */
 	public void repaint() {
 		// if there is a picture frame tell it to repaint
-		if (pictureFrame != null)
-			pictureFrame.repaint();
-		
-		// else create a new picture frame
-		else
-			pictureFrame = new PictureFrame(this);
+		if (this.pictureFrame != null) {
+			this.pictureFrame.repaint();
+		} else {
+			this.pictureFrame = new PictureFrame(this);
+		}
 	}
-	
+
 	/**
 	 * Method to load the picture from the passed file name
-	 * 
-	 * @param fileName
-	 *            the file name to use to load the picture from
-	 * @throws IOException
-	 *             if the picture isn't found
+	 *
+	 * @param fileName the file name to use to load the picture from
+	 * @throws IOException if the picture isn't found
 	 */
 	public void loadOrFail_DEF(String fileName) throws IOException {
 		// set the current picture's file name
 		this.fileName = fileName;
-		
+
 		// set the extension
 		int posDot = fileName.indexOf('.');
-		if (posDot >= 0)
+		if (posDot >= 0) {
 			this.extension = fileName.substring(posDot + 1);
-		
+		}
+
 		// if the current title is null use the file name
-		if (title == null)
-			title = fileName;
-		
+		if (this.title == null) {
+			this.title = fileName;
+		}
+
 		File file = new File(this.fileName);
-		
+
 		if ( !file.canRead()) {
 			// try adding the media path
 			file = new File(FileChooser.getMediaPath(this.fileName));
 			if ( !file.canRead()) {
-				throw new IOException(
-						this.fileName
-								+ " could not be opened. Check that you specified the path");
+				throw new IOException(this.fileName
+						+ " could not be opened. Check that you specified the path");
 			}
 		}
-		
-		bufferedImage = ImageIO.read(file);
+
+		this.bufferedImage = ImageIO.read(file);
 	}
-	
+
 	/**
 	 * Method to load the picture from the passed file name
-	 * 
-	 * @param fileName
-	 *            the file name to use to load the picture from
-	 * @throws IOException
-	 *             if the picture isn't found
+	 *
+	 * @param fileName the file name to use to load the picture from
+	 * @throws IOException if the picture isn't found
 	 */
 	public void loadOrFail(String fileName) throws IOException {
-		
+
 		// set the extension
 		int posDot = fileName.indexOf('.');
-		if (posDot >= 0)
+		if (posDot >= 0) {
 			this.extension = fileName.substring(posDot + 1);
-		
+		}
+
 		// if the current title is null use the file name
-		if (title == null)
-			title = fileName;
-		
-		File file = getFilePathOf(fileName);
-		
+		if (this.title == null) {
+			this.title = fileName;
+		}
+
+		File file = this.getFilePathOf(fileName);
+
 		if ( !file.canRead()) {
 			// try adding the media path
 			file = new File(FileChooser.getMediaPath(this.fileName));
 			if ( !file.canRead()) {
-				throw new IOException(
-						this.fileName
-								+ " could not be opened. Check that you specified the path");
+				throw new IOException(this.fileName
+						+ " could not be opened. Check that you specified the path");
 			}
 		}
-		
-		bufferedImage = ImageIO.read(file);
+
+		this.bufferedImage = ImageIO.read(file);
 	}
-	
+
 	/**
-	 * Method to read the contents of the picture from a filename without
-	 * throwing errors
-	 * 
-	 * @param fileName
-	 *            the name of the file to write the picture to
+	 * Method to read the contents of the picture from a filename without throwing errors
+	 *
+	 * @param fileName the name of the file to write the picture to
 	 * @return true if success else false
 	 */
+	@Override
 	public boolean load(String fileName) {
 		try {
 			try {
@@ -555,230 +546,211 @@ public class SimplePicture implements DigitalPicture {
 				this.loadOrFail(fileName);
 				return true;
 			}
-			
+
 		} catch (Exception ex) {
 			System.out.println("There was an error trying to open " + fileName);
 			ex.printStackTrace();
-			bufferedImage = new BufferedImage(600, 200,
-					BufferedImage.TYPE_INT_RGB);
-			addMessage("Couldn't load " + fileName, 5, 100);
+			this.bufferedImage = new BufferedImage(600, 200, BufferedImage.TYPE_INT_RGB);
+			this.addMessage("Couldn't load " + fileName, 5, 100);
 			return false;
 		}
-		
+
 	}
-	
+
 	/**
-	 * Method to load the picture from the passed file name this just calls
-	 * load(fileName) and is for name compatibility
-	 * 
-	 * @param fileName
-	 *            the file name to use to load the picture from
+	 * Method to load the picture from the passed file name this just calls load(fileName)
+	 * and is for name compatibility
+	 *
+	 * @param fileName the file name to use to load the picture from
 	 * @return true if success else false
 	 */
 	public boolean loadImage(String fileName) {
-		return load(fileName);
+		return this.load(fileName);
 	}
-	
+
 	/**
 	 * Method to draw a message as a string on the buffered image
-	 * 
-	 * @param message
-	 *            the message to draw on the buffered image
-	 * @param xPos
-	 *            the leftmost point of the string in x
-	 * @param yPos
-	 *            the bottom of the string in y
+	 *
+	 * @param message the message to draw on the buffered image
+	 * @param xPos the leftmost point of the string in x
+	 * @param yPos the bottom of the string in y
 	 */
 	public void addMessage(String message, int xPos, int yPos) {
 		// get a graphics context to use to draw on the buffered image
-		Graphics2D graphics2d = bufferedImage.createGraphics();
-		
+		Graphics2D graphics2d = this.bufferedImage.createGraphics();
+
 		// set the color to white
 		graphics2d.setPaint(Color.white);
-		
+
 		// set the font to Helvetica bold style and size 16
 		graphics2d.setFont(new Font("Helvetica", Font.BOLD, 16));
-		
+
 		// draw the message
 		graphics2d.drawString(message, xPos, yPos);
-		
+
 	}
-	
+
 	/**
 	 * Method to draw a string at the given location on the picture
-	 * 
-	 * @param text
-	 *            the text to draw
-	 * @param xPos
-	 *            the left x for the text
-	 * @param yPos
-	 *            the top y for the text
+	 *
+	 * @param text the text to draw
+	 * @param xPos the left x for the text
+	 * @param yPos the top y for the text
 	 */
 	public void drawString(String text, int xPos, int yPos) {
-		addMessage(text, xPos, yPos);
+		this.addMessage(text, xPos, yPos);
 	}
-	
+
 	/**
-	 * Method to create a new picture by scaling the current picture by the
-	 * given
-	 * 
-	 * @param rFactor
-	 *            the amount to scale in the height (rows)
-	 * @param cFactor
-	 *            the amount to scale in the width (columns)
+	 * Method to create a new picture by scaling the current picture by the given
+	 *
+	 * @param rFactor the amount to scale in the height (rows)
+	 * @param cFactor the amount to scale in the width (columns)
 	 * @return the resulting picture
 	 */
 	public Picture scale(double rFactor, double cFactor) {
 		// set up the scale tranform
 		AffineTransform scaleTransform = new AffineTransform();
 		scaleTransform.scale(cFactor, rFactor);
-		
+
 		// create a new picture object that is the right size
-		Picture result = new Picture((int) (getHeight() * rFactor),
-				(int) (getWidth() * cFactor));
-		
+		Picture result = new Picture((int) (this.getHeight() * rFactor), (int) (this.getWidth() * cFactor));
+
 		// get the graphics 2d object to draw on the result
 		Graphics graphics = result.getGraphics();
 		Graphics2D g2 = (Graphics2D) graphics;
-		
+
 		// draw the current image onto the result image scaled
 		g2.drawImage(this.getImage(), scaleTransform, null);
-		
+
 		return result;
 	}
-	
+
 	/**
-	 * Method to create a new picture of the passed width. The aspect ratio of
-	 * the width and height will stay the same.
-	 * 
-	 * @param width
-	 *            the desired width
+	 * Method to create a new picture of the passed width. The aspect ratio of the width
+	 * and height will stay the same.
+	 *
+	 * @param width the desired width
 	 * @return the resulting picture
 	 */
 	public Picture getPictureWithWidth(int width) {
 		// set up the scale tranform
 		double xFactor = (double) width / this.getWidth();
-		Picture result = scale(xFactor, xFactor);
+		Picture result = this.scale(xFactor, xFactor);
 		return result;
 	}
-	
+
 	/**
-	 * Method to create a new picture of the passed height. The aspect ratio of
-	 * the width and height will stay the same.
-	 * 
-	 * @param height
-	 *            the desired height
+	 * Method to create a new picture of the passed height. The aspect ratio of the width
+	 * and height will stay the same.
+	 *
+	 * @param height the desired height
 	 * @return the resulting picture
 	 */
 	public Picture getPictureWithHeight(int height) {
 		// set up the scale tranform
 		double yFactor = (double) height / this.getHeight();
-		Picture result = scale(yFactor, yFactor);
+		Picture result = this.scale(yFactor, yFactor);
 		return result;
 	}
-	
+
 	/**
 	 * Method to load a picture from a file name and show it in a picture frame
-	 * 
-	 * @param fileName
-	 *            the file name to load the picture from
+	 *
+	 * @param fileName the file name to load the picture from
 	 * @return true if success else false
 	 */
 	public boolean loadPictureAndShowIt(String fileName) {
 		boolean result = true; // the default is that it worked
-		
+
 		// try to load the picture into the buffered image from the file name
-		result = load(fileName);
-		
+		result = this.load(fileName);
+
 		// show the picture in a picture frame
-		show();
-		
+		this.show();
+
 		return result;
 	}
-	
+
 	/**
-	 * Method to write the contents of the picture to a file with the passed
-	 * name
-	 * 
-	 * @param fileName
-	 *            the name of the file to write the picture to
+	 * Method to write the contents of the picture to a file with the passed name
+	 *
+	 * @param fileName the name of the file to write the picture to
 	 */
 	public void writeOrFail_DEF(String fileName) throws IOException {
 		String extension = this.extension; // the default is current
-		
+
 		// create the file object
 		File file = new File(fileName);
 		File fileLoc = file.getParentFile(); // directory name
-		
+
 		// if there is no parent directory use the current media dir
 		if (fileLoc == null) {
 			fileName = FileChooser.getMediaPath(fileName);
 			file = new File(fileName);
 			fileLoc = file.getParentFile();
 		}
-		
+
 		// check that you can write to the directory
 		if ( !fileLoc.canWrite()) {
-			throw new IOException(
-					fileName
-							+ " could not be opened. Check to see if you can write to the directory.");
+			throw new IOException(fileName
+					+ " could not be opened. Check to see if you can write to the directory.");
 		}
-		
+
 		// get the extension
 		int posDot = fileName.indexOf('.');
-		if (posDot >= 0)
+		if (posDot >= 0) {
 			extension = fileName.substring(posDot + 1);
-		
+		}
+
 		// write the contents of the buffered image to the file as jpeg
-		ImageIO.write(bufferedImage, extension, file);
+		ImageIO.write(this.bufferedImage, extension, file);
 	}
-	
+
 	/**
-	 * Method to write the contents of the picture to a file with the passed
-	 * name
-	 * 
-	 * @param fileName
-	 *            the name of the file to write the picture to
+	 * Method to write the contents of the picture to a file with the passed name
+	 *
+	 * @param fileName the name of the file to write the picture to
 	 */
 	public void writeOrFail(String fileName) throws IOException {
 		String extension = this.extension; // the default is current
-		
+
 		// create the file object
-		File file = getFilePathOf(fileName);
+		File file = this.getFilePathOf(fileName);
 		File fileLoc = file.getParentFile(); // directory name
-		
+
 		// if there is no parent directory use the current media dir
 		if (fileLoc == null) {
 			fileName = FileChooser.getMediaPath(fileName);
 			file = new File(fileName);
 			fileLoc = file.getParentFile();
 		}
-		
+
 		// check that you can write to the directory
 		if ( !fileLoc.canWrite()) {
-			throw new IOException(
-					fileName
-							+ " could not be opened. Check to see if you can write to the directory.");
+			throw new IOException(fileName
+					+ " could not be opened. Check to see if you can write to the directory.");
 		}
-		
+
 		// get the extension
 		int posDot = fileName.indexOf('.');
-		if (posDot >= 0)
+		if (posDot >= 0) {
 			extension = fileName.substring(posDot + 1);
-		
+		}
+
 		// write the contents of the buffered image to the file as jpeg
-		ImageIO.write(bufferedImage, extension, file);
-		
+		ImageIO.write(this.bufferedImage, extension, file);
+
 	}
-	
+
 	/**
-	 * Method to write the contents of the picture to a file with the passed
-	 * name without throwing errors
-	 * 
-	 * @param fileName
-	 *            the name of the file to write the picture to
+	 * Method to write the contents of the picture to a file with the passed name without
+	 * throwing errors
+	 *
+	 * @param fileName the name of the file to write the picture to
 	 * @return true if success else false
 	 */
+	@Override
 	public boolean write(String fileName) {
 		try {
 			try {
@@ -789,35 +761,32 @@ public class SimplePicture implements DigitalPicture {
 				return true;
 			}
 		} catch (Exception ex) {
-			System.out
-					.println("There was an error trying to write " + fileName);
+			System.out.println("There was an error trying to write " + fileName);
 			ex.printStackTrace();
 			return false;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Method to get the directory for the media
-	 * 
-	 * @param fileName
-	 *            the base file name to use
-	 * @return the full path name by appending the file name to the media
-	 *         directory
+	 *
+	 * @param fileName the base file name to use
+	 * @return the full path name by appending the file name to the media directory
 	 */
 	public static String getMediaPath(String fileName) {
 		return FileChooser.getMediaPath(fileName);
 	}
-	
+
 	/**
-	 * Method to get the coordinates of the enclosing rectangle after this
-	 * transformation is applied to the current picture
-	 * 
+	 * Method to get the coordinates of the enclosing rectangle after this transformation
+	 * is applied to the current picture
+	 *
 	 * @return the enclosing rectangle
 	 */
 	public Rectangle2D getTransformEnclosingRect(AffineTransform trans) {
-		int width = getWidth();
-		int height = getHeight();
+		int width = this.getWidth();
+		int height = this.getHeight();
 		double maxX = width - 1;
 		double maxY = height - 1;
 		double minX, minY;
@@ -827,7 +796,7 @@ public class SimplePicture implements DigitalPicture {
 		Point2D.Double p4 = new Point2D.Double(0, maxY);
 		Point2D.Double result = new Point2D.Double(0, 0);
 		Rectangle2D.Double rect = null;
-		
+
 		// get the new points and min x and y and max x and y
 		trans.deltaTransform(p1, result);
 		minX = result.getX();
@@ -849,50 +818,49 @@ public class SimplePicture implements DigitalPicture {
 		maxX = Math.max(maxX, result.getX());
 		minY = Math.min(minY, result.getY());
 		maxY = Math.max(maxY, result.getY());
-		
+
 		// create the bounding rectangle to return
-		rect = new Rectangle2D.Double(minX, minY, maxX - minX + 1, maxY - minY
-				+ 1);
+		rect = new Rectangle2D.Double(minX, minY, maxX - minX + 1, maxY - minY + 1);
 		return rect;
 	}
-	
+
 	/**
-	 * Method to get the coordinates of the enclosing rectangle after this
-	 * transformation is applied to the current picture
-	 * 
+	 * Method to get the coordinates of the enclosing rectangle after this transformation
+	 * is applied to the current picture
+	 *
 	 * @return the enclosing rectangle
 	 */
 	public Rectangle2D getTranslationEnclosingRect(AffineTransform trans) {
-		return getTransformEnclosingRect(trans);
+		return this.getTransformEnclosingRect(trans);
 	}
-	
+
 	/**
-	 * Private method to return a file object representing the given filename,
-	 * assuming that the file is in the ../images/ folder
-	 * 
-	 * @param filename
-	 *            The file to look for (should be /images/\<filename\>)
+	 * Private method to return a file object representing the given filename, assuming
+	 * that the file is in the ../images/ folder
+	 *
+	 * @param filename The file to look for (should be /images/\<filename\>)
 	 * @return a file object object of the image or file
 	 */
 	private File getFilePathOf(String filename) {
-		String path = this.getClass().getResource("SimplePicture.class")
-				.getFile();
+		String path = this.getClass().getResource("SimplePicture.class").getFile();
 		while (path.indexOf("/classes/") != -1) {
 			path = path.substring(0, path.indexOf("/classes/"));
 		}
 		File file = new File(path + "/images/" + filename);
 		return file;
 	}
-	
+
 	/**
 	 * Method to return a string with information about this picture
-	 * 
+	 *
 	 * @return a string with information about the picture
 	 */
+	@Override
 	public String toString() {
-		String output = "Simple Picture, filename " + fileName + " height "
-				+ getHeight() + " width " + getWidth();
+		String output =
+				"Simple Picture, filename " + this.fileName + " height " + this.getHeight() + " width "
+						+ this.getWidth();
 		return output;
 	}
-	
+
 } // end of SimplePicture class

@@ -3,7 +3,7 @@ package oharaRectangle;
 import oharaPoint.Point;
 
 public class RectangleTest {
-	
+
 	public static void main(String[] args) {
 		Rectangle r = new Rectangle(0, 10, 10, 10);
 		System.out.println(r);
@@ -18,9 +18,9 @@ public class RectangleTest {
 		System.out.println(r2);
 		System.out.println(r2.coordinates()); // should be [5,15,15,5]
 		System.out.println(r.union(r2).coordinates()); // should be [0, 15, 15,
-														// 0]
+		// 0]
 		System.out.println(r.intersection(r2).coordinates()); // should be
-																// [5,10, 5, 10]
+		// [5,10, 5, 10]
 	}
-	
+
 }

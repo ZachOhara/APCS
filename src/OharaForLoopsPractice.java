@@ -1,19 +1,19 @@
 /* Problem 1:
- * 1 3 5 7 9 
- * 
+ * 1 3 5 7 9
+ *
  * 1 * 3 * 11 *
- * 
+ *
  * 1 3 1 2 1 1
  * 2 3 2 2 2 1
  * 3 3 3 2 3 1
  *
  * 4 0 4 3
  * 5 0 5 3
- * 
+ *
  * 1 3 0 1 3 1
  * 1 2 0 1 2 1
  * 1 1 0 1 1 1
- * 
+ *
  * 2 3 0 2 3 1
  * 2 2 0 2 2 1
  * 2 1 0 2 1 1
@@ -40,7 +40,7 @@
  *    | 4 | "*"
  *    | 5 | "*"
  *    |   | "\n"
- *    
+ *
  * Condensed output:
  * |   *
  * |  ***
@@ -56,21 +56,21 @@
  */
 
 public class OharaForLoopsPractice {
-	
+
 	public static void main(String[] args) {
 		System.out.println("Problems 1-3 shown in comments\n");
 		System.out.println("Problem 4:\n");
-		problem4();
+		OharaForLoopsPractice.problem4();
 		System.out.println("\nProblem 5:\n");
-		problem5();
+		OharaForLoopsPractice.problem5();
 		System.out.println("\nProblem 6:\n");
-		problem6();
+		OharaForLoopsPractice.problem6();
 		System.out.println("\nProblem 7:\n");
-		problem7();
+		OharaForLoopsPractice.problem7();
 		System.out.println("\nProblem 8:\n");
-		problem8();
+		OharaForLoopsPractice.problem8();
 	}
-	
+
 	public static void problem4() {
 		int sum = 0;
 		for (int i = 1; i <= 6; i++) {
@@ -78,7 +78,7 @@ public class OharaForLoopsPractice {
 		}
 		System.out.println(sum);
 	}
-	
+
 	public static void problem5() {
 		// How do you completely skim over 90% of new content in a book?
 		// Sara has much bigger problems than not being certified
@@ -87,15 +87,16 @@ public class OharaForLoopsPractice {
 		double toLearn = 100;
 		String spacing = "      | ";
 		for (double i = 0; i <= 20; i++) {
-			if (i == 10)
+			if (i == 10) {
 				spacing = spacing.substring(1);
+			}
 			System.out.println((int) i + spacing + (int) (100 - toLearn));
 			toLearn *= 0.9;
 		}
 		// She can read the same book for 20 months, and still not get a 90 on
 		// the test?
 	}
-	
+
 	public static void problem6() {
 		System.out.print("1, ");
 		System.out.print("1, ");
@@ -110,7 +111,7 @@ public class OharaForLoopsPractice {
 		}
 		System.out.println();
 	}
-	
+
 	public static void problem7() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -119,7 +120,7 @@ public class OharaForLoopsPractice {
 			System.out.println();
 		}
 	}
-	
+
 	public static void problem8() {
 		// Yes, I know it said A *OR* B, but I wanted to do both anyway
 		System.out.println("Output A:");
@@ -129,7 +130,7 @@ public class OharaForLoopsPractice {
 			}
 			System.out.println();
 		}
-		
+
 		System.out.println("\nOutput B:");
 		for (int i = 1; i <= 5; i++) {
 			String dashes = "";
@@ -143,7 +144,7 @@ public class OharaForLoopsPractice {
 			System.out.println(dashes);
 		}
 	}
-	
+
 	// Used in problem 5
 	// Calculates how much of the book Sara has learned after n months
 	// Deprecated to reduce complexity
@@ -151,7 +152,7 @@ public class OharaForLoopsPractice {
 	public static int percentLearned(double timesRead) {
 		return (int) (100 - (100 * Math.pow(0.9, timesRead)));
 	}
-	
+
 	// Used in problem 7
 	// Calculates the nth fibonacci number recursively
 	// Deprecated to better fit project guidelines
@@ -160,8 +161,8 @@ public class OharaForLoopsPractice {
 		if (k <= 2) {
 			return 1;
 		} else {
-			return fibonacci(k - 1) + fibonacci(k - 2);
+			return OharaForLoopsPractice.fibonacci(k - 1) + OharaForLoopsPractice.fibonacci(k - 2);
 		}
 	}
-	
+
 }

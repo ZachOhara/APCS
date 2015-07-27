@@ -4,43 +4,42 @@ package oharaShapes3D;
  */
 
 public class Cube extends CubicShape {
-	
+
 	// Construct a cube with side length of zero
 	public Cube() {
 		super();
 	}
-	
+
 	// Construct a cube with a given side length
 	public Cube(double side) {
 		super(side);
 	}
-	
+
 	// Construct a cube with the same side length as another cube
 	public Cube(Cube other) {
 		super(other);
 	}
-	
+
 	/*
-	 * The setLength, setWidth, and setHeight methods are all overridden from
-	 * CubicShape so that they can be redirected to the method setAllDimensions.
-	 * This way, updating any dimension individually will retain the cubic
-	 * nature of the shape.
+	 * The setLength, setWidth, and setHeight methods are all overridden from CubicShape so
+	 * that they can be redirected to the method setAllDimensions. This way, updating any
+	 * dimension individually will retain the cubic nature of the shape.
 	 */
 	@Override
 	public void setLength(double newLength) {
 		this.setAllDimensions(newLength);
 	}
-	
+
 	@Override
 	public void setWidth(double newWidth) {
 		this.setAllDimensions(newWidth);
 	}
-	
+
 	@Override
 	public void setHeight(double newHeight) {
 		this.setAllDimensions(newHeight);
 	}
-	
+
 	// Get the String representation of the object
 	@Override
 	public String toString() {
@@ -48,5 +47,5 @@ public class Cube extends CubicShape {
 		// this.heightToString() will evaluate to " and height of " +
 		// this.getHeight()
 	}
-	
+
 }

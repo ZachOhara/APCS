@@ -3,10 +3,10 @@ package oharaShopping;
 import java.util.ArrayList;
 
 public class ShoppingCart {
-	
+
 	private ArrayList<ItemOrder> localList;
 	private boolean isDiscount;
-	
+
 	/**
 	 * Construct a new, empty, shopping cart
 	 */
@@ -14,33 +14,31 @@ public class ShoppingCart {
 		this.localList = new ArrayList<ItemOrder>();
 		this.isDiscount = false;
 	}
-	
+
 	/**
 	 * Add an item order to the cart
-	 * 
-	 * @param newOrder
-	 *            The IemOrder to be added
+	 *
+	 * @param newOrder The IemOrder to be added
 	 */
 	public void add(ItemOrder newOrder) {
-		if (this.containsItem(newOrder.getItem()))
+		if (this.containsItem(newOrder.getItem())) {
 			this.removeItem(newOrder.getItem());
+		}
 		this.localList.add(newOrder);
 	}
-	
+
 	/**
 	 * Set whether to apply a 10% discount on the final price
-	 * 
-	 * @param b
-	 *            {@code true} to use the discount; {@code false} to pay full
-	 *            price
+	 *
+	 * @param b {@code true} to use the discount; {@code false} to pay full price
 	 */
 	public void setDiscount(boolean b) {
 		this.isDiscount = b;
 	}
-	
+
 	/**
 	 * Calculate the total cost of the orders in the cart
-	 * 
+	 *
 	 * @return The combined cost of all orders
 	 */
 	public double getTotal() {
@@ -52,29 +50,36 @@ public class ShoppingCart {
 		}
 		return total * discountFactor;
 	}
-	
+
 	private boolean containsItem(Item i) {
-		for (ItemOrder order : this.localList)
-			if (i.toString().equals(order.getItem().toString()))
+		for (ItemOrder order : this.localList) {
+			if (i.toString().equals(order.getItem().toString())) {
 				return true;
+			}
+		}
 		return false;
 	}
-	
+
 	private void removeItem(Item item) {
-		for (int i = 0; i < localList.size(); i++)
-			if (item.toString().equals(this.localList.get(i).toString()))
-				localList.remove(i);
+		for (int i = 0; i < this.localList.size(); i++) {
+			if (item.toString().equals(this.localList.get(i).toString())) {
+				this.localList.remove(i);
+			}
+		}
 	}
-	
+
+	@Override
 	public String toString() {
 		String result = "";
-		for (ItemOrder io : this.localList)
+		for (ItemOrder io : this.localList) {
 			result += io.toString() + "\n";
-		if (this.isDiscount)
+		}
+		if (this.isDiscount) {
 			result += "Qualify for discount";
-		else
+		} else {
 			result += "Does not qualify for discount";
+		}
 		return result;
 	}
-	
+
 }

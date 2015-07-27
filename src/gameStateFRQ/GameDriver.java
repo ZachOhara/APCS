@@ -1,29 +1,30 @@
 package gameStateFRQ;
 
 public class GameDriver {
-	
+
 	private GameState state; // the current state of the game
-	
+
 	public GameDriver(GameState initial) {
-		state = initial;
+		this.state = initial;
 	}
-	
+
 	public void play() {
-		System.out.println(state);
+		System.out.println(this.state);
 		Player currentPlayer;
 		String move;
-		while ( !state.isGameOver()) {
-			currentPlayer = state.getCurrentPlayer();
-			move = currentPlayer.getNextMove(state);
+		while ( !this.state.isGameOver()) {
+			currentPlayer = this.state.getCurrentPlayer();
+			move = currentPlayer.getNextMove(this.state);
 			System.out.println("Player: " + currentPlayer.getName());
 			System.out.println("Move: " + move);
-			state.makeMove(move);
+			this.state.makeMove(move);
 		}
-		Player winner = state.getWinner();
-		if (winner != null)
+		Player winner = this.state.getWinner();
+		if (winner != null) {
 			System.out.println(winner.getName() + " wins");
-		else
+		} else {
 			System.out.println("Game ends in a draw");
+		}
 	}
-	
+
 }

@@ -6,49 +6,66 @@ package oharaShopping;
 // Class ShoppingFrame provides the user interface for a simple shopping
 // program.
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.text.NumberFormat;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.text.*;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class ShoppingFrame extends JFrame {
-	
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private ShoppingCart items;
 	private JTextField total;
-	
+
 	public ShoppingFrame(Catalog products) {
 		// create frame and order list
-		setTitle(products.getName());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		items = new ShoppingCart();
-		
+		this.setTitle(products.getName());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.items = new ShoppingCart();
+
 		// set up text field with order total
-		total = new JTextField("$0.00", 12);
-		total.setEditable(false);
-		total.setEnabled(false);
-		total.setDisabledTextColor(Color.BLACK);
+		this.total = new JTextField("$0.00", 12);
+		this.total.setEditable(false);
+		this.total.setEnabled(false);
+		this.total.setDisabledTextColor(Color.BLACK);
 		JPanel p = new JPanel();
 		p.setBackground(Color.blue);
 		JLabel l = new JLabel("order total");
 		l.setForeground(Color.YELLOW);
 		p.add(l);
-		p.add(total);
-		add(p, BorderLayout.NORTH);
-		
+		p.add(this.total);
+		this.add(p, BorderLayout.NORTH);
+
 		p = new JPanel(new GridLayout(products.size(), 1));
-		for (int i = 0; i < products.size(); i++)
-			addItem(products.get(i), p);
-		add(p, BorderLayout.CENTER);
-		
+		for (int i = 0; i < products.size(); i++) {
+			this.addItem(products.get(i), p);
+		}
+		this.add(p, BorderLayout.CENTER);
+
 		p = new JPanel();
-		add(makeCheckBoxPanel(), BorderLayout.SOUTH);
-		
+		this.add(this.makeCheckBoxPanel(), BorderLayout.SOUTH);
+
 		// adjust size to just fit
-		pack();
+		this.pack();
 	}
-	
+
 	// Sets up the "discount" checkbox for the frame
 	private JPanel makeCheckBoxPanel() {
 		JPanel p = new JPanel();
@@ -56,15 +73,16 @@ public class ShoppingFrame extends JFrame {
 		final JCheckBox cb = new JCheckBox("qualify for discount");
 		p.add(cb);
 		cb.addActionListener(new ActionListener() {
-			
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				items.setDiscount(cb.isSelected());
-				updateTotal();
+				ShoppingFrame.this.items.setDiscount(cb.isSelected());
+				ShoppingFrame.this.updateTotal();
 			}
 		});
 		return p;
 	}
-	
+
 	// adds a product to the panel, including a textfield for user input of
 	// the quantity
 	private void addItem(final Item product, JPanel p) {
@@ -73,16 +91,18 @@ public class ShoppingFrame extends JFrame {
 		final JTextField quantity = new JTextField(3);
 		quantity.setHorizontalAlignment(SwingConstants.CENTER);
 		quantity.addActionListener(new ActionListener() {
-			
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				updateItem(product, quantity);
+				ShoppingFrame.this.updateItem(product, quantity);
 				quantity.transferFocus();
 			}
 		});
 		quantity.addFocusListener(new FocusAdapter() {
-			
+
+			@Override
 			public void focusLost(FocusEvent e) {
-				updateItem(product, quantity);
+				ShoppingFrame.this.updateItem(product, quantity);
 			}
 		});
 		sub.add(quantity);
@@ -91,7 +111,7 @@ public class ShoppingFrame extends JFrame {
 		sub.add(l);
 		p.add(sub);
 	}
-	
+
 	// When the user types a new value into one of the quantity fields,
 	// parse the input and update the ShoppingCart. Display an error
 	// message if text is not a number or is negative.
@@ -109,14 +129,14 @@ public class ShoppingFrame extends JFrame {
 			quantity.setText("");
 			number = 0;
 		}
-		items.add(new ItemOrder(product, number));
-		updateTotal();
+		this.items.add(new ItemOrder(product, number));
+		this.updateTotal();
 	}
-	
+
 	// reset the text field for order total
 	private void updateTotal() {
-		double amount = items.getTotal();
-		System.out.println(items);
-		total.setText(NumberFormat.getCurrencyInstance().format(amount));
+		double amount = this.items.getTotal();
+		System.out.println(this.items);
+		this.total.setText(NumberFormat.getCurrencyInstance().format(amount));
 	}
 }
